@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Layers, Package } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/language-provider"
+import { getCategoryName } from "@/lib/category-i18n"
 import { fetchCategories, fetchCategoryBySlug } from "@/lib/services/categories-client"
 import { fetchProducts } from "@/lib/services/products-client"
 import type { Category } from "@/lib/domains/category/types"
@@ -15,7 +16,7 @@ import { ProductCard } from "@/components/marketplace/product-card"
 type Status = "loading" | "loaded" | "notFound" | "error"
 
 export function CategoryDetailsView({ slug }: { slug: string }) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const m = t.marketplace.categories
   const [state, setState] = useState<{
     slug: string
@@ -85,14 +86,14 @@ export function CategoryDetailsView({ slug }: { slug: string }) {
         items={[
           { label: t.marketplace.breadcrumbHome, href: "/" },
           { label: m.title, href: "/categories" },
-          { label: category.name },
+          { label: getCategoryName(category.slug, lang, category.name) },
         ]}
       />
 
       <div className="mx-auto max-w-6xl space-y-10 px-4 py-8">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            {category.name}
+            {getCategoryName(category.slug, lang, category.name)}
           </h1>
           {category.description && (
             <p className="mt-2 max-w-2xl text-muted-foreground">{category.description}</p>
@@ -112,7 +113,7 @@ export function CategoryDetailsView({ slug }: { slug: string }) {
                   href={`/categories/${child.slug}`}
                   className="rounded-full border border-border px-3 py-1 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
                 >
-                  {child.name}
+                  {getCategoryName(child.slug, lang, child.name)}
                 </Link>
               ))}
             </div>

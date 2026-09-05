@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { getCategoryName } from "@/lib/category-i18n"
 import { fetchCategories } from "@/lib/services/categories-client"
 import type { Category } from "@/lib/domains/category/types"
 import { Breadcrumbs, CardGridSkeleton, ListingHeader } from "@/components/marketplace/shell"
@@ -58,7 +59,7 @@ function PremiumCard({
 }
 
 export function CategoriesListing() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const m = t.marketplace.categories
   const [status, setStatus] = useState<"loading" | "loaded">("loading")
   const [categories, setCategories] = useState<Category[]>([])
@@ -94,7 +95,7 @@ export function CategoriesListing() {
                   key={cat.id}
                   href={`/categories/${cat.slug}`}
                   image={CATEGORY_IMAGES[i % CATEGORY_IMAGES.length] ?? CATEGORY_IMAGES[0]}
-                  name={cat.name}
+                  name={getCategoryName(cat.slug, lang, cat.name)}
                   meta={kids > 0 ? `${kids} ${m.subcategories}` : undefined}
                 />
               )
