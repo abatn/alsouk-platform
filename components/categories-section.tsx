@@ -1,40 +1,69 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import {
   Utensils,
   Shirt,
   Building2,
   Cog,
+  FlaskConical,
+  Cpu,
   Package,
   Leaf,
   Sofa,
-  Cpu,
-  FlaskConical,
   Grid,
+  Layers,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { getCategoryName } from "@/lib/category-i18n"
+import { fetchCategories } from "@/lib/services/categories-client"
+import type { Category } from "@/lib/domains/category/types"
 
-// Decorative category shortcuts on the home page. These link to the general
-// /categories browse page rather than per-category slugs, and intentionally
-// carry no supplier-count number — the real company_categories/product_categories
-// link tables are empty today, so any live count would show 0 for all of them;
-// a fabricated count ("3,200+" etc.) would be worse than showing none.
-const CATEGORIES_DATA = [
-  { id: "food", icon: Utensils, names: { en: "Food", fr: "Alimentation", ar: "أغذية" } },
-  { id: "textile", icon: Shirt, names: { en: "Textile", fr: "Textile", ar: "نسيج" } },
-  { id: "construction", icon: Building2, names: { en: "Construction", fr: "Construction", ar: "بناء" } },
-  { id: "machinery", icon: Cog, names: { en: "Machinery", fr: "Machines", ar: "آلات" } },
-  { id: "packaging", icon: Package, names: { en: "Packaging", fr: "Emballage", ar: "تعبئة وتغليف" } },
-  { id: "agriculture", icon: Leaf, names: { en: "Agriculture", fr: "Agriculture", ar: "زراعة" } },
-  { id: "furniture", icon: Sofa, names: { en: "Furniture", fr: "Mobilier", ar: "أثاث" } },
-  { id: "electronics", icon: Cpu, names: { en: "Electronics", fr: "Électronique", ar: "إلكترونيات" } },
-  { id: "chemicals", icon: FlaskConical, names: { en: "Chemicals", fr: "Produits chimiques", ar: "كيماويات" } },
-  { id: "more", icon: Grid, names: { en: "More", fr: "Plus", ar: "المزيد" } },
-]
+/**
+ * Maps category slugs to icons. Covers the DB categories plus a generic
+ * fallback for any slug that doesn't have a dedicated icon.
+ */
+const ICON_BY_SLUG: Record<string, LucideIcon> = {
+  food: Utensils,
+  textile: Shirt,
+  textiles: Shirt,
+  construction: Building2,
+  mechanical: Cog,
+  machinery: Cog,
+  chemical: FlaskConical,
+  chemicals: FlaskConical,
+  electrical: Cpu,
+  packaging: Package,
+  agriculture: Leaf,
+  furniture: Sofa,
+  electronics: Cpu,
+  handicrafts: Layers,
+  cosmetics: Layers,
+  leather: Layers,
+}
+
+function iconForSlug(slug: string): LucideIcon {
+  return ICON_BY_SLUG[slug] ?? Layers
+}
 
 export function CategoriesSection() {
   const { t, lang } = useLanguage()
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    let active = true
+    fetchCategories().then((data) => {
+      if (!active) return
+      setCategories(data.filter((c) => !c.parentId))
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  if (categories.length === 0) return null
 
   return (
     <section id="categories" className="py-6 bg-background">
@@ -49,14 +78,14 @@ export function CategoriesSection() {
         </div>
 
         {/* Horizontal scrolling on mobile/tablet viewports */}
-        <div className="no-scrollbar -mx-6 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:grid sm:grid-cols-5 md:grid-cols-10 sm:overflow-visible sm:px-0 sm:mx-0">
-          {CATEGORIES_DATA.map((cat) => {
-            const Icon = cat.icon
-            const catName = cat.names[lang] || cat.names["en"]
+        <div className="no-scrollbar -mx-6 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:grid sm:grid-cols-3 md:grid-cols-6 sm:overflow-visible sm:px-0 sm:mx-0">
+          {categories.map((cat) => {
+            const Icon = iconForSlug(cat.slug)
+            const catName = getCategoryName(cat.slug, lang, cat.name)
             return (
               <Link
                 key={cat.id}
-                href="/categories"
+                href={`/categories/${cat.slug}`}
                 className="group flex w-[100px] shrink-0 snap-start flex-col items-center gap-3 rounded-[20px] border border-border bg-card p-3 text-center transition-all duration-300 hover:border-primary/25 hover:shadow-sm active:scale-[0.98] sm:w-auto"
               >
                 <span className="flex size-12 items-center justify-center rounded-[20px] bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
