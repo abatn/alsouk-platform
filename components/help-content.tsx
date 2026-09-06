@@ -120,16 +120,15 @@ export function HelpContent() {
           <AlertTriangle className="size-6 text-amber-500 mx-auto" />
           <h3 className="font-bold text-foreground">Report Abuse</h3>
           <p className="text-sm text-muted-foreground">
-            Found suspicious activity or a policy violation? Let us know.
+            Found suspicious activity or a policy violation? Use the contact
+            form below.
           </p>
           <a
-            href="mailto:abuse@alsouk.com?subject=Report%20Abuse%20—%20ALSOUK"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-all"
           >
             <Mail className="size-4" />
-            Report via Email
+            Contact Us
           </a>
         </section>
 
