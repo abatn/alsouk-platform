@@ -40,6 +40,17 @@ export function getPopularTerms(lang: Lang): string[] {
   });
 }
 
+/**
+ * Returns all category items as { name: string }[] for a given language.
+ * Derived entirely from CATEGORY_KEYS + directory-i18n.ts at runtime.
+ */
+export function getCategoryItems(lang: Lang): { name: string }[] {
+  return CATEGORY_KEYS.map((key) => {
+    const categories = directoryT[lang].categories as Record<string, string>;
+    return { name: categories[key] ?? key };
+  });
+}
+
 export function getCategoryName(
   slug: string,
   lang: Lang,

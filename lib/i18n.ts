@@ -57,7 +57,6 @@ type Dict = {
     title: string;
     subtitle: string;
     viewAll: string;
-    items: { name: string }[];
   };
   suppliers: {
     title: string;
@@ -517,7 +516,7 @@ export const translations: Record<Lang, Dict> = {
       items: [
         {
           title: "High-Grade Olive Oil Bulk Contract (Extra Virgin)",
-          type: "Agri-Food",
+          type: "food",
           badge: "Trending",
           price: "13.950 - 19.220 DT",
           moq: "5,000 L",
@@ -526,7 +525,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Premium Organic Cotton Yarn Roll",
-          type: "Textiles",
+          type: "textiles",
           badge: "Hot Deal",
           price: "6.510 - 10.540 DT",
           moq: "1,000 m",
@@ -535,7 +534,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Handpainted Ceramic Dinnerware Set",
-          type: "Handicrafts",
+          type: "handicrafts",
           badge: "Exclusive",
           price: "24.800 - 43.400 DT",
           moq: "50 sets",
@@ -544,7 +543,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Premium Organic Deglet Nour Dates Pallet",
-          type: "Agri-Food",
+          type: "food",
           badge: "Fast Moving",
           price: "9.920 - 15.500 DT",
           moq: "2 tons",
@@ -558,16 +557,6 @@ export const translations: Record<Lang, Dict> = {
       subtitle:
         "Browse thousands of verified products across leading industries",
       viewAll: "View all categories",
-      items: [
-        { name: "Food & Agriculture" },
-        { name: "Textiles & Apparel" },
-        { name: "Industrial Machinery" },
-        { name: "Construction & Building" },
-        { name: "Handicrafts & Ceramics" },
-        { name: "Cosmetics & Health" },
-        { name: "Leather & Footwear" },
-        { name: "Chemicals & Plastics" },
-      ],
     },
     suppliers: {
       title: "Featured Suppliers",
@@ -855,7 +844,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Medina Olive Co.",
           duration: "2:45",
           views: "3.4k views",
-          category: "Agri-Food",
+          category: "food",
           type: "process",
         },
         {
@@ -863,7 +852,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Carthage Textiles",
           duration: "3:15",
           views: "1.8k views",
-          category: "Textiles",
+          category: "textiles",
           type: "factory",
         },
         {
@@ -871,7 +860,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Atlas Ceramics",
           duration: "1:50",
           views: "2.1k views",
-          category: "Handicrafts",
+          category: "handicrafts",
           type: "product",
         },
         {
@@ -879,7 +868,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Sahara Dates Export",
           duration: "2:10",
           views: "1.2k views",
-          category: "Agri-Food",
+          category: "food",
           type: "process",
         },
         {
@@ -888,7 +877,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Kairouan Leather",
           duration: "3:40",
           views: "940 views",
-          category: "Leather Goods",
+          category: "leather",
           type: "product",
         },
         {
@@ -896,7 +885,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Tunis Metalworks",
           duration: "4:05",
           views: "1.5k views",
-          category: "Industrial",
+          category: "machinery",
           type: "factory",
         },
       ],
@@ -1031,25 +1020,25 @@ export const translations: Record<Lang, Dict> = {
       companyItems: [
         {
           name: "Medina Olive Co.",
-          category: "Food & Agriculture",
+          category: "food",
           products: "48 products",
           location: "Sfax",
         },
         {
           name: "Carthage Textiles",
-          category: "Textiles & Apparel",
+          category: "textiles",
           products: "120 products",
           location: "Monastir",
         },
         {
           name: "Atlas Ceramics",
-          category: "Handicrafts & Ceramics",
+          category: "handicrafts",
           products: "64 products",
           location: "Nabeul",
         },
         {
           name: "Tunis Metalworks",
-          category: "Industrial Machinery",
+          category: "machinery",
           products: "89 products",
           location: "Tunis",
         },
@@ -1254,7 +1243,7 @@ export const translations: Record<Lang, Dict> = {
       items: [
         {
           title: "Contrat de Vrac d'Huile d'Olive Extra Vierge de Qualité",
-          type: "Agroalimentaire",
+          type: "food",
           badge: "Tendance",
           price: "13.950 - 19.220 DT",
           moq: "5 000 L",
@@ -1263,7 +1252,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Rouleau de Fil de Coton Biologique de Qualité Supérieure",
-          type: "Textiles",
+          type: "textiles",
           badge: "Offre Spéciale",
           price: "6.510 - 10.540 DT",
           moq: "1 000 m",
@@ -1272,7 +1261,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Service de Table en Céramique Peint à la Main",
-          type: "Artisanat",
+          type: "handicrafts",
           badge: "Exclusif",
           price: "24.800 - 43.400 DT",
           moq: "50 services",
@@ -1281,7 +1270,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "Palette de Dattes Deglet Nour Biologiques Supérieures",
-          type: "Agroalimentaire",
+          type: "food",
           badge: "Flux Rapide",
           price: "9.920 - 15.500 DT",
           moq: "2 tonnes",
@@ -1295,16 +1284,6 @@ export const translations: Record<Lang, Dict> = {
       subtitle:
         "Parcourez des milliers de produits vérifiés dans les principales industries",
       viewAll: "Voir toutes les catégories",
-      items: [
-        { name: "Alimentation & Agriculture" },
-        { name: "Textiles & Habillement" },
-        { name: "Machines industrielles" },
-        { name: "Construction & Bâtiment" },
-        { name: "Artisanat & Céramique" },
-        { name: "Cosmétiques & Santé" },
-        { name: "Cuir & Chaussures" },
-        { name: "Chimie & Plastiques" },
-      ],
     },
     suppliers: {
       title: "Fournisseurs en vedette",
@@ -1604,7 +1583,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Medina Olive Co.",
           duration: "2:45",
           views: "3.4k vues",
-          category: "Agroalimentaire",
+          category: "food",
           type: "process",
         },
         {
@@ -1612,7 +1591,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Carthage Textiles",
           duration: "3:15",
           views: "1.8k vues",
-          category: "Textiles",
+          category: "textiles",
           type: "factory",
         },
         {
@@ -1620,7 +1599,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Atlas Ceramics",
           duration: "1:50",
           views: "2.1k vues",
-          category: "Artisanat",
+          category: "handicrafts",
           type: "product",
         },
         {
@@ -1628,7 +1607,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Sahara Dates Export",
           duration: "2:10",
           views: "1.2k vues",
-          category: "Agroalimentaire",
+          category: "food",
           type: "process",
         },
         {
@@ -1637,7 +1616,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Kairouan Leather",
           duration: "3:40",
           views: "940 vues",
-          category: "Maroquinerie",
+          category: "leather",
           type: "product",
         },
         {
@@ -1646,7 +1625,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "Tunis Metalworks",
           duration: "4:05",
           views: "1.5k vues",
-          category: "Industriel",
+          category: "machinery",
           type: "factory",
         },
       ],
@@ -1790,25 +1769,25 @@ export const translations: Record<Lang, Dict> = {
       companyItems: [
         {
           name: "Medina Olive Co.",
-          category: "Alimentation & Agriculture",
+          category: "food",
           products: "48 produits",
           location: "Sfax",
         },
         {
           name: "Carthage Textiles",
-          category: "Textile & Habillement",
+          category: "textiles",
           products: "120 produits",
           location: "Monastir",
         },
         {
           name: "Atlas Ceramics",
-          category: "Artisanat & Céramique",
+          category: "handicrafts",
           products: "64 produits",
           location: "Nabeul",
         },
         {
           name: "Tunis Metalworks",
-          category: "Machines industrielles",
+          category: "machinery",
           products: "89 produits",
           location: "Tunis",
         },
@@ -2016,7 +1995,7 @@ export const translations: Record<Lang, Dict> = {
       items: [
         {
           title: "عقد زيت زيتون بكر ممتاز سائب ذو جودة عالية",
-          type: "الأغذية والزراعة",
+          type: "food",
           badge: "رائج",
           price: "13.950 - 19.220 د.ت",
           moq: "5,000 لتر",
@@ -2025,7 +2004,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "رول خيوط قطنية عضوية فاخرة",
-          type: "المنسوجات",
+          type: "textiles",
           badge: "عرض خاص",
           price: "6.510 - 10.540 د.ت",
           moq: "1,000 م",
@@ -2034,7 +2013,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "طقم مائدة خزفي ملون يدويًا بالكامل",
-          type: "الحرف اليدوية",
+          type: "handicrafts",
           badge: "حصري",
           price: "24.800 - 43.400 د.ت",
           moq: "50 طقم",
@@ -2043,7 +2022,7 @@ export const translations: Record<Lang, Dict> = {
         },
         {
           title: "تمور دقلة النور الفاخرة العضوية الممتازة",
-          type: "الأغذية والزراعة",
+          type: "food",
           badge: "سريع الطلب",
           price: "9.920 - 15.500 د.ت",
           moq: "2 طن",
@@ -2056,17 +2035,8 @@ export const translations: Record<Lang, Dict> = {
       title: "استكشف الفئات",
       subtitle: "تصفّح آلاف المنتجات الموثّقة في أبرز الصناعات",
       viewAll: "عرض كل الفئات",
-      items: [
-        { name: "الأغذية والزراعة" },
-        { name: "المنسوجات والملابس" },
-        { name: "الآلات الصناعية" },
-        { name: "البناء والتشييد" },
-        { name: "الحرف والخزف" },
-        { name: "مستحضرات التجميل والصحة" },
-        { name: "الجلود والأحذية" },
-        { name: "الكيماويات والبلاستيك" },
-      ],
     },
+
     suppliers: {
       title: "موردون مميزون",
       subtitle: "مصنّعون ومصدّرون موثّقون جاهزون لتلبية طلباتك",
@@ -2343,7 +2313,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "شركة مدينة للزيتون",
           duration: "2:45",
           views: "3.4k مشاهدة",
-          category: "الأغذية والزراعة",
+          category: "food",
           type: "process",
         },
         {
@@ -2351,7 +2321,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "قرطاج للمنسوجات",
           duration: "3:15",
           views: "1.8k مشاهدة",
-          category: "المنسوجات",
+          category: "textiles",
           type: "factory",
         },
         {
@@ -2359,7 +2329,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "أطلس للخزف",
           duration: "1:50",
           views: "2.1k مشاهدة",
-          category: "الحرف اليدوية",
+          category: "handicrafts",
           type: "product",
         },
         {
@@ -2367,7 +2337,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "الصحراء لتصدير التمور",
           duration: "2:10",
           views: "1.2k مشاهدة",
-          category: "الأغذية والزراعة",
+          category: "food",
           type: "process",
         },
         {
@@ -2375,7 +2345,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "القيروان للجلود",
           duration: "3:40",
           views: "940 مشاهدة",
-          category: "المنتجات الجلدية",
+          category: "leather",
           type: "product",
         },
         {
@@ -2383,7 +2353,7 @@ export const translations: Record<Lang, Dict> = {
           supplier: "تونس للأشغال المعدنية",
           duration: "4:05",
           views: "1.5k مشاهدة",
-          category: "صناعي",
+          category: "machinery",
           type: "factory",
         },
       ],
@@ -2518,25 +2488,25 @@ export const translations: Record<Lang, Dict> = {
       companyItems: [
         {
           name: "Medina Olive Co.",
-          category: "الغذاء والزراعة",
+          category: "food",
           products: "48 منتجاً",
           location: "صفاقس",
         },
         {
           name: "Carthage Textiles",
-          category: "النسيج والملابس",
+          category: "textiles",
           products: "120 منتجاً",
           location: "المنستير",
         },
         {
           name: "Atlas Ceramics",
-          category: "الحرف والخزف",
+          category: "handicrafts",
           products: "64 منتجاً",
           location: "نابل",
         },
         {
           name: "Tunis Metalworks",
-          category: "الآلات الصناعية",
+          category: "machinery",
           products: "89 منتجاً",
           location: "تونس",
         },

@@ -1,17 +1,20 @@
-"use client"
+"use client";
 
-import { useLanguage } from "@/components/language-provider"
-import { ArrowRight, MapPin, Package, Sparkles, Store } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { useLanguage } from "@/components/language-provider";
+import { getCategoryName } from "@/lib/category-i18n";
+import { ArrowRight, MapPin, Package, Sparkles, Store } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function OpportunitiesSection() {
-  const { t, dir } = useLanguage()
+  const { t, lang, dir } = useLanguage();
 
   return (
-    <section id="opportunities" className="py-12 border-b border-border bg-secondary/25">
+    <section
+      id="opportunities"
+      className="py-12 border-b border-border bg-secondary/25"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
         {/* Section Header */}
         <div className="flex flex-col items-start justify-between gap-4 border-b border-border/80 pb-6 sm:flex-row sm:items-end">
           <div>
@@ -50,7 +53,7 @@ export function OpportunitiesSection() {
                 {/* Badge and Type row */}
                 <div className="flex items-center justify-between">
                   <span className="inline-block rounded-md bg-secondary px-2 py-0.5 text-[10px] font-bold text-secondary-foreground uppercase">
-                    {item.type}
+                    {getCategoryName(item.type, lang)}
                   </span>
                   <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-bold text-accent">
                     <span className="size-1.5 rounded-full bg-accent animate-pulse" />
@@ -67,7 +70,9 @@ export function OpportunitiesSection() {
                 <div className="mt-4 space-y-2 border-t border-border/60 pt-3 text-xs text-muted-foreground">
                   <div className="flex items-center gap-1.5">
                     <Store className="size-3.5 text-primary shrink-0" />
-                    <span className="truncate font-semibold text-foreground/80">{item.supplier}</span>
+                    <span className="truncate font-semibold text-foreground/80">
+                      {item.supplier}
+                    </span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <MapPin className="size-3.5 text-muted-foreground shrink-0" />
@@ -75,7 +80,10 @@ export function OpportunitiesSection() {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Package className="size-3.5 text-muted-foreground shrink-0" />
-                    <span>{t.products.moq}: <strong className="text-foreground">{item.moq}</strong></span>
+                    <span>
+                      {t.products.moq}:{" "}
+                      <strong className="text-foreground">{item.moq}</strong>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -83,8 +91,12 @@ export function OpportunitiesSection() {
               {/* Price Tier and CTA button */}
               <div className="mt-5 border-t border-border/60 pt-3">
                 <div className="flex items-baseline justify-between mb-3">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{t.products.perUnit}</span>
-                  <span className="text-sm font-extrabold text-primary sm:text-base">{item.price}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {t.products.perUnit}
+                  </span>
+                  <span className="text-sm font-extrabold text-primary sm:text-base">
+                    {item.price}
+                  </span>
                 </div>
 
                 <Link href="/rfq" className="block w-full">
@@ -110,8 +122,7 @@ export function OpportunitiesSection() {
             <ArrowRight className="size-3.5 rtl:rotate-180" />
           </Link>
         </div>
-
       </div>
     </section>
-  )
+  );
 }

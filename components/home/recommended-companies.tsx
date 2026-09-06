@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ArrowRight, BadgeCheck, MapPin, Plus, Sparkles, Store } from "lucide-react"
-import { buttonVariants } from "@/components/ui/button"
-import { useLanguage } from "@/components/language-provider"
+import Link from "next/link";
+import {
+  ArrowRight,
+  BadgeCheck,
+  MapPin,
+  Plus,
+  Sparkles,
+  Store,
+} from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { useLanguage } from "@/components/language-provider";
+import { getCategoryName } from "@/lib/category-i18n";
 
 function initials(name: string) {
   return name
@@ -11,11 +19,11 @@ function initials(name: string) {
     .map((w) => w[0])
     .slice(0, 2)
     .join("")
-    .toUpperCase()
+    .toUpperCase();
 }
 
 export function RecommendedCompanies() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage();
 
   return (
     <section className="bg-secondary/30 py-10 lg:py-16">
@@ -29,7 +37,9 @@ export function RecommendedCompanies() {
             <h2 className="mt-2.5 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
               {t.home.companiesTitle}
             </h2>
-            <p className="mt-1.5 text-sm text-muted-foreground">{t.home.companiesSubtitle}</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              {t.home.companiesSubtitle}
+            </p>
           </div>
           <Link
             href="/companies"
@@ -64,7 +74,7 @@ export function RecommendedCompanies() {
 
               <div className="mt-4 flex flex-col gap-1">
                 <p className="inline-flex w-fit rounded-full bg-secondary px-3 py-1 text-[11px] font-bold text-secondary-foreground">
-                  {c.category}
+                  {getCategoryName(c.category, lang)}
                 </p>
                 <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                   <Store className="size-4" />
@@ -75,7 +85,11 @@ export function RecommendedCompanies() {
               <div className="mt-6 flex items-center gap-2.5">
                 <Link
                   href="/companies"
-                  className={buttonVariants({ variant: "outline", className: "flex-1 rounded-xl h-10 text-xs font-bold transition-all hover:bg-muted" })}
+                  className={buttonVariants({
+                    variant: "outline",
+                    className:
+                      "flex-1 rounded-xl h-10 text-xs font-bold transition-all hover:bg-muted",
+                  })}
                 >
                   {t.home.visitStore}
                 </Link>
@@ -92,5 +106,5 @@ export function RecommendedCompanies() {
         </div>
       </div>
     </section>
-  )
+  );
 }

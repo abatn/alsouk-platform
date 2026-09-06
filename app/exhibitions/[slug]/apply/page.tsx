@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { use, useEffect, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { use, useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Building2,
   Calendar,
@@ -20,19 +20,28 @@ import {
   FileText,
   MessageSquare,
   ArrowRight,
-  ArrowLeft
-} from "lucide-react"
-import { useLanguage } from "@/components/language-provider"
-import { fetchExhibitionBySlug, submitExhibitionApplication } from "@/lib/services/exhibitions-client"
-import type { Exhibition } from "@/lib/domains/exhibition/types"
-import { MarketplaceShell, Breadcrumbs, MessageState } from "@/components/marketplace/shell"
-import { directoryT } from "@/lib/directory-i18n"
+  ArrowLeft,
+} from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import {
+  fetchExhibitionBySlug,
+  submitExhibitionApplication,
+} from "@/lib/services/exhibitions-client";
+import type { Exhibition } from "@/lib/domains/exhibition/types";
+import {
+  MarketplaceShell,
+  Breadcrumbs,
+  MessageState,
+} from "@/components/marketplace/shell";
+import { directoryT } from "@/lib/directory-i18n";
+import { getCategoryItems } from "@/lib/category-i18n";
 
 // Localized translation dictionaries to prevent any global pollution
 const formTranslations = {
   en: {
     pageTitle: "Apply to Exhibit",
-    subtitle: "Submit your business details to participate in this virtual trade show.",
+    subtitle:
+      "Submit your business details to participate in this virtual trade show.",
     compName: "Company Name",
     compNamePlaceholder: "e.g. Medina Olive Co.",
     contactPerson: "Contact Person",
@@ -44,9 +53,11 @@ const formTranslations = {
     country: "Country",
     businessCategory: "Business Category",
     shortDesc: "Short Description",
-    shortDescPlaceholder: "Briefly describe your company's core products, innovations or exhibits...",
+    shortDescPlaceholder:
+      "Briefly describe your company's core products, innovations or exhibits...",
     message: "Message to Organizer (Optional)",
-    messagePlaceholder: "Ask questions or describe your specific setup needs...",
+    messagePlaceholder:
+      "Ask questions or describe your specific setup needs...",
     confirmCheckbox: "I confirm that all information is correct.",
     submitBtn: "Submit Application",
     cancelBtn: "Cancel",
@@ -55,18 +66,21 @@ const formTranslations = {
     invalidEmail: "Please enter a valid email address",
     invalidPhone: "Please enter a valid Tunisian phone number (8 digits)",
     descTooLong: "Short description is too long (max 500 characters)",
-    duplicateError: "You have already submitted an application for this exhibition.",
+    duplicateError:
+      "You have already submitted an application for this exhibition.",
     errorSubmitting: "Failed to submit application. Please try again.",
     successTitle: "Application Submitted",
     successPendingStatus: "Status: Pending",
-    successMsg: "Thank you for applying! The exhibition organizer will review your business details and contact you. Once approved, you will be able to set up and manage your virtual booth.",
+    successMsg:
+      "Thank you for applying! The exhibition organizer will review your business details and contact you. Once approved, you will be able to set up and manage your virtual booth.",
     viewStatusBtn: "View Application Status",
     charCount: "characters remaining",
     selectCategory: "Select a Category",
   },
   fr: {
     pageTitle: "Demande de stand",
-    subtitle: "Soumettez les détails de votre entreprise pour participer à ce salon virtuel.",
+    subtitle:
+      "Soumettez les détails de votre entreprise pour participer à ce salon virtuel.",
     compName: "Nom de l'entreprise",
     compNamePlaceholder: "ex. Medina Olive Co.",
     contactPerson: "Personne de contact",
@@ -78,22 +92,26 @@ const formTranslations = {
     country: "Pays",
     businessCategory: "Secteur d'activité",
     shortDesc: "Brève description",
-    shortDescPlaceholder: "Décrivez brièvement les produits phares, innovations ou pièces exposées...",
+    shortDescPlaceholder:
+      "Décrivez brièvement les produits phares, innovations ou pièces exposées...",
     message: "Message à l'organisateur (Optionnel)",
-    messagePlaceholder: "Posez des questions ou décrivez vos besoins d'installation...",
+    messagePlaceholder:
+      "Posez des questions ou décrivez vos besoins d'installation...",
     confirmCheckbox: "Je confirme que toutes les informations sont correctes.",
     submitBtn: "Soumettre la demande",
     cancelBtn: "Annuler",
     submitting: "Envoi en cours...",
     requiredField: "Ce champ est requis",
     invalidEmail: "Veuillez entrer une adresse e-mail valide",
-    invalidPhone: "Veuillez entrer un numéro de téléphone tunisien valide (8 chiffres)",
+    invalidPhone:
+      "Veuillez entrer un numéro de téléphone tunisien valide (8 chiffres)",
     descTooLong: "La description est trop longue (max 500 caractères)",
     duplicateError: "Vous avez déjà soumis une demande pour cette exposition.",
     errorSubmitting: "Échec de l'envoi de la demande. Veuillez réessayer.",
     successTitle: "Demande soumise avec succès",
     successPendingStatus: "Statut : En attente",
-    successMsg: "Merci pour votre candidature ! L'organisateur de l'exposition examinera vos coordonnées et vous contactera. Une fois approuvé, vous pourrez configurer et gérer votre stand virtuel.",
+    successMsg:
+      "Merci pour votre candidature ! L'organisateur de l'exposition examinera vos coordonnées et vous contactera. Une fois approuvé, vous pourrez configurer et gérer votre stand virtuel.",
     viewStatusBtn: "Voir le statut de la demande",
     charCount: "caractères restants",
     selectCategory: "Sélectionnez une catégorie",
@@ -112,7 +130,8 @@ const formTranslations = {
     country: "البلد",
     businessCategory: "فئة العمل / القطاع",
     shortDesc: "وصف قصير عن الشركة",
-    shortDescPlaceholder: "صف بإيجاز منتجات شركتك الأساسية أو ابتكاراتك أو معروضاتك...",
+    shortDescPlaceholder:
+      "صف بإيجاز منتجات شركتك الأساسية أو ابتكاراتك أو معروضاتك...",
     message: "رسالة إلى المنظم (اختياري)",
     messagePlaceholder: "اطرح أسئلة أو صف احتياجات الإعداد الخاصة بك...",
     confirmCheckbox: "أؤكد أن جميع المعلومات المقدمة صحيحة.",
@@ -127,152 +146,125 @@ const formTranslations = {
     errorSubmitting: "فشل تقديم الطلب. يرجى المحاولة مرة أخرى.",
     successTitle: "تم تقديم الطلب بنجاح",
     successPendingStatus: "الحالة: قيد الانتظار",
-    successMsg: "شكراً لتقديم طلبك! سيقوم منظم المعرض بمراجعة تفاصيل شركتك والاتصال بك. بمجرد الموافقة، ستتمكن من إعداد وإدارة جناحك الافتراضي بنجاح.",
+    successMsg:
+      "شكراً لتقديم طلبك! سيقوم منظم المعرض بمراجعة تفاصيل شركتك والاتصال بك. بمجرد الموافقة، ستتمكن من إعداد وإدارة جناحك الافتراضي بنجاح.",
     viewStatusBtn: "عرض حالة الطلب",
     charCount: "حروف متبقية",
     selectCategory: "اختر الفئة",
-  }
-}
+  },
+};
 
-const categoriesMap = {
-  en: [
-    "Food & Agriculture",
-    "Agri-Food Tech",
-    "Textiles & Apparel",
-    "Industrial Machinery",
-    "Construction & Building",
-    "Handicrafts & Ceramics",
-    "Cosmetics & Health",
-    "Leather & Footwear",
-    "Chemicals & Plastics"
-  ],
-  fr: [
-    "Alimentation & Agriculture",
-    "Agroalimentaire Tech",
-    "Textiles & Habillement",
-    "Machines Industrielles",
-    "Construction & Bâtiment",
-    "Artisanat & Céramique",
-    "Cosmétiques & Santé",
-    "Cuir & Chaussures",
-    "Chimie & Plastiques"
-  ],
-  ar: [
-    "الأغذية والزراعة",
-    "تكنولوجيا الأغذية والزراعة",
-    "المنسوجات والملابس",
-    "الآلات الصناعية",
-    "البناء والتشييد",
-    "الحرف والخزف",
-    "مستحضرات التجميل والصحة",
-    "الجلود والأحذية",
-    "الكيماويات والبلاستيك"
-  ]
-}
-
-export default function ExhibitionApplyPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params)
+export default function ExhibitionApplyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = use(params);
   return (
     <MarketplaceShell>
       <ExhibitionApplyContent slug={slug} />
     </MarketplaceShell>
-  )
+  );
 }
 
 function ExhibitionApplyContent({ slug }: { slug: string }) {
-  const { t, lang, dir } = useLanguage()
-  const router = useRouter()
-  const exT = t.exhibitions
-  const dirT = directoryT[lang] || directoryT.en
-  const fT = formTranslations[lang] || formTranslations.en
-  const industries = categoriesMap[lang] || categoriesMap.en
+  const { t, lang, dir } = useLanguage();
+  const router = useRouter();
+  const exT = t.exhibitions;
+  const dirT = directoryT[lang] || directoryT.en;
+  const fT = formTranslations[lang] || formTranslations.en;
+  const industries = getCategoryItems(lang).map((item) => item.name);
 
   // Data states
-  const [exhibition, setExhibition] = useState<Exhibition | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [exhibition, setExhibition] = useState<Exhibition | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   // Form states
-  const [companyName, setCompanyName] = useState("")
-  const [contactPerson, setContactPerson] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
-  const [country, setCountry] = useState("TN")
-  const [businessCategory, setBusinessCategory] = useState("")
-  const [shortDescription, setShortDescription] = useState("")
-  const [message, setMessage] = useState("")
-  const [confirmed, setConfirmed] = useState(false)
+  const [companyName, setCompanyName] = useState("");
+  const [contactPerson, setContactPerson] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("TN");
+  const [businessCategory, setBusinessCategory] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [message, setMessage] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
 
   // Status/submission states
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submissionSuccess, setSubmissionSuccess] = useState<string | null>(null)
-  const [submissionError, setSubmissionError] = useState<string | null>(null)
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionSuccess, setSubmissionSuccess] = useState<string | null>(
+    null,
+  );
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<
+    Record<string, string>
+  >({});
 
   useEffect(() => {
-    let active = true
+    let active = true;
 
     fetchExhibitionBySlug(slug)
       .then((res) => {
-        if (!active) return
+        if (!active) return;
         if (res.error || !res.data) {
-          setError(true)
-          setLoading(false)
-          return
+          setError(true);
+          setLoading(false);
+          return;
         }
-        setExhibition(res.data)
-        setLoading(false)
+        setExhibition(res.data);
+        setLoading(false);
       })
       .catch(() => {
         if (active) {
-          setError(true)
-          setLoading(false)
+          setError(true);
+          setLoading(false);
         }
-      })
+      });
 
     return () => {
-      active = false
-    }
-  }, [slug])
+      active = false;
+    };
+  }, [slug]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!exhibition) return
+    e.preventDefault();
+    if (!exhibition) return;
 
-    setIsSubmitting(true)
-    setSubmissionError(null)
-    setValidationErrors({})
+    setIsSubmitting(true);
+    setSubmissionError(null);
+    setValidationErrors({});
 
-    const errors: Record<string, string> = {}
+    const errors: Record<string, string> = {};
 
     // Required fields check
-    if (!companyName.trim()) errors.companyName = fT.requiredField
-    if (!contactPerson.trim()) errors.contactPerson = fT.requiredField
+    if (!companyName.trim()) errors.companyName = fT.requiredField;
+    if (!contactPerson.trim()) errors.contactPerson = fT.requiredField;
     if (!email.trim()) {
-      errors.email = fT.requiredField
+      errors.email = fT.requiredField;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      errors.email = fT.invalidEmail
+      errors.email = fT.invalidEmail;
     }
 
     if (!phone.trim()) {
-      errors.phone = fT.requiredField
+      errors.phone = fT.requiredField;
     } else if (phone.trim().length !== 8 || !/^\d{8}$/.test(phone.trim())) {
-      errors.phone = fT.invalidPhone
+      errors.phone = fT.invalidPhone;
     }
 
-    if (!country.trim()) errors.country = fT.requiredField
-    if (!businessCategory.trim()) errors.businessCategory = fT.requiredField
+    if (!country.trim()) errors.country = fT.requiredField;
+    if (!businessCategory.trim()) errors.businessCategory = fT.requiredField;
 
     if (!shortDescription.trim()) {
-      errors.shortDescription = fT.requiredField
+      errors.shortDescription = fT.requiredField;
     } else if (shortDescription.trim().length > 500) {
-      errors.shortDescription = fT.descTooLong
+      errors.shortDescription = fT.descTooLong;
     }
 
     if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors)
-      setIsSubmitting(false)
-      return
+      setValidationErrors(errors);
+      setIsSubmitting(false);
+      return;
     }
 
     try {
@@ -287,27 +279,27 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
         businessCategory: businessCategory.trim(),
         shortDescription: shortDescription.trim(),
         message: message.trim() || null,
-      })
+      });
 
       if (res.error) {
         // Resolve duplicate state vs normal failure
-        setIsSubmitting(false)
-        setSubmissionError(fT.duplicateError)
-        return
+        setIsSubmitting(false);
+        setSubmissionError(fT.duplicateError);
+        return;
       }
 
       if (res.data) {
-        setSubmissionSuccess(res.data.id)
+        setSubmissionSuccess(res.data.id);
       } else {
-        setSubmissionError(fT.errorSubmitting)
+        setSubmissionError(fT.errorSubmitting);
       }
     } catch (err) {
-      console.error("[exhibitions-apply] Error submitting application:", err)
-      setSubmissionError(fT.errorSubmitting)
+      console.error("[exhibitions-apply] Error submitting application:", err);
+      setSubmissionError(fT.errorSubmitting);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   // Premium, beautiful loading skeleton screen
   if (loading) {
@@ -328,7 +320,7 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   if (error || !exhibition) {
@@ -338,24 +330,27 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
         title={t.marketplace.error}
         description={exT.boothNotFoundDesc}
         action={
-          <Link href="/exhibitions" className="rounded-[20px] bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-md active:scale-95 transition-all">
+          <Link
+            href="/exhibitions"
+            className="rounded-[20px] bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-md active:scale-95 transition-all"
+          >
             {exT.backToExhibitionsList}
           </Link>
         }
       />
-    )
+    );
   }
 
   const startStr = new Date(exhibition.startDate).toLocaleDateString(
     lang === "en" ? "en-US" : lang === "fr" ? "fr-FR" : "ar-TN",
-    { year: "numeric", month: "long", day: "numeric" }
-  )
+    { year: "numeric", month: "long", day: "numeric" },
+  );
   const endStr = new Date(exhibition.endDate).toLocaleDateString(
     lang === "en" ? "en-US" : lang === "fr" ? "fr-FR" : "ar-TN",
-    { year: "numeric", month: "long", day: "numeric" }
-  )
-  const cityLoc = dirT.cities[exhibition.city] || exhibition.city
-  const isTunisia = exhibition.country === "TN"
+    { year: "numeric", month: "long", day: "numeric" },
+  );
+  const cityLoc = dirT.cities[exhibition.city] || exhibition.city;
+  const isTunisia = exhibition.country === "TN";
 
   // 1. SUCCESS VIEW IN-PAGE
   if (submissionSuccess) {
@@ -392,11 +387,15 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
             className="w-full min-h-12 inline-flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary/95 text-xs font-black text-white transition-all active:scale-95 shadow-md shadow-primary/10"
           >
             <span>{fT.viewStatusBtn}</span>
-            {dir === "rtl" ? <ArrowLeft className="size-4" /> : <ArrowRight className="size-4" />}
+            {dir === "rtl" ? (
+              <ArrowLeft className="size-4" />
+            ) : (
+              <ArrowRight className="size-4" />
+            )}
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   // 2. MAIN APPLICATION FORM VIEW
@@ -433,7 +432,9 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
               </div>
               <div className="flex items-center gap-1.5 min-w-0">
                 <MapPin className="size-3.5 text-primary-foreground shrink-0" />
-                <span className="truncate capitalize">{cityLoc}, {isTunisia ? "Tunisia" : exhibition.country}</span>
+                <span className="truncate capitalize">
+                  {cityLoc}, {isTunisia ? "Tunisia" : exhibition.country}
+                </span>
               </div>
             </div>
           </div>
@@ -554,7 +555,9 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
                 maxLength={8}
                 placeholder={fT.phonePlaceholder}
                 value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 8))}
+                onChange={(e) =>
+                  setPhone(e.target.value.replace(/\D/g, "").slice(0, 8))
+                }
                 className={`w-full rounded-xl border bg-card py-3.5 pe-4 ps-[92px] text-xs font-extrabold tracking-wider transition-all outline-none focus:ring-2 focus:ring-primary/10 ${
                   validationErrors.phone
                     ? "border-destructive focus:border-destructive"
@@ -581,9 +584,27 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
                 onChange={(e) => setCountry(e.target.value)}
                 className="w-full appearance-none rounded-xl border border-border bg-card py-3.5 px-4 text-xs font-bold transition-all outline-none focus:ring-2 focus:ring-primary/10 cursor-pointer pr-10"
               >
-                <option value="TN">{lang === "ar" ? "تونس 🇹🇳" : lang === "fr" ? "Tunisie 🇹🇳" : "Tunisia 🇹🇳"}</option>
-                <option value="LY">{lang === "ar" ? "ليبيا 🇱🇾" : lang === "fr" ? "Libye 🇱🇾" : "Libya 🇱🇾"}</option>
-                <option value="DZ">{lang === "ar" ? "الجزائر 🇩🇿" : lang === "fr" ? "Algérie 🇩🇿" : "Algeria 🇩🇿"}</option>
+                <option value="TN">
+                  {lang === "ar"
+                    ? "تونس 🇹🇳"
+                    : lang === "fr"
+                      ? "Tunisie 🇹🇳"
+                      : "Tunisia 🇹🇳"}
+                </option>
+                <option value="LY">
+                  {lang === "ar"
+                    ? "ليبيا 🇱🇾"
+                    : lang === "fr"
+                      ? "Libye 🇱🇾"
+                      : "Libya 🇱🇾"}
+                </option>
+                <option value="DZ">
+                  {lang === "ar"
+                    ? "الجزائر 🇩🇿"
+                    : lang === "fr"
+                      ? "Algérie 🇩🇿"
+                      : "Algeria 🇩🇿"}
+                </option>
               </select>
             </div>
           </div>
@@ -634,7 +655,9 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
               <textarea
                 placeholder={fT.shortDescPlaceholder}
                 value={shortDescription}
-                onChange={(e) => setShortDescription(e.target.value.slice(0, 500))}
+                onChange={(e) =>
+                  setShortDescription(e.target.value.slice(0, 500))
+                }
                 rows={3}
                 className={`w-full rounded-xl border bg-card py-3 px-4 text-xs font-bold transition-all outline-none focus:ring-2 focus:ring-primary/10 resize-none ${
                   validationErrors.shortDescription
@@ -676,7 +699,10 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
               onChange={(e) => setConfirmed(e.target.checked)}
               className="size-4.5 rounded-sm border-border bg-card text-primary focus:ring-primary/10 mt-0.5 cursor-pointer"
             />
-            <label htmlFor="confirm" className="text-xs font-bold text-muted-foreground select-none leading-tight cursor-pointer">
+            <label
+              htmlFor="confirm"
+              className="text-xs font-bold text-muted-foreground select-none leading-tight cursor-pointer"
+            >
               {fT.confirmCheckbox}
             </label>
           </div>
@@ -708,5 +734,5 @@ function ExhibitionApplyContent({ slug }: { slug: string }) {
         </form>
       </div>
     </div>
-  )
+  );
 }
