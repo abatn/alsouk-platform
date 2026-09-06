@@ -576,6 +576,14 @@ type Dict = {
       info: { email: string; phone: string; address: string; hours: string };
     };
   };
+  messages: {
+    title: string;
+    empty: string;
+    emptyDesc: string;
+    signInTitle: string;
+    signInDesc: string;
+    signIn: string;
+  };
 };
 
 export const translations: Record<Lang, Dict> = {
@@ -1636,6 +1644,15 @@ export const translations: Record<Lang, Dict> = {
           hours: "Mon-Fri, 9:00 AM - 6:00 PM (GMT+1)",
         },
       },
+    },
+    messages: {
+      title: "Messages",
+      empty: "No conversations yet",
+      emptyDesc:
+        "When you contact a supplier or a buyer reaches out, your conversations will show up here.",
+      signInTitle: "Sign in to see your messages",
+      signInDesc: "Messages are tied to your account.",
+      signIn: "Sign in",
     },
   },
   fr: {
@@ -2721,6 +2738,15 @@ export const translations: Record<Lang, Dict> = {
         },
       },
     },
+    messages: {
+      title: "Messages",
+      empty: "Aucune conversation pour l'instant",
+      emptyDesc:
+        "Vos conversations avec les fournisseurs et acheteurs apparaîtront ici.",
+      signInTitle: "Connectez-vous pour voir vos messages",
+      signInDesc: "Les messages sont liés à votre compte.",
+      signIn: "Se connecter",
+    },
   },
   ar: {
     nav: {
@@ -3754,6 +3780,15 @@ export const translations: Record<Lang, Dict> = {
           hours: "الاثنين-الجمعة، 9:00 - 18:00 ( GMT+1)",
         },
       },
+    },
+    messages: {
+      title: "الرسائل",
+      empty: "لا توجد محادثات بعد",
+      emptyDesc:
+        "عندما تتواصل مع مورد أو يتواصل معك مشتري، ستظهر محادثاتك هنا.",
+      signInTitle: "سجّل الدخول لعرض رسائلك",
+      signInDesc: "الرسائل مرتبطة بحسابك.",
+      signIn: "تسجيل الدخول",
     },
   },
 };

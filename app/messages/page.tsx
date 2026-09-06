@@ -8,33 +8,6 @@ import { useLanguage } from "@/components/language-provider"
 import { useAuth } from "@/components/auth-provider"
 import type { ConversationSummary } from "@/lib/domains/message/types"
 
-const LOCAL_I18N = {
-  en: {
-    title: "Messages",
-    empty: "No conversations yet",
-    emptyDesc: "When you contact a supplier or a buyer reaches out, your conversations will show up here.",
-    signInTitle: "Sign in to see your messages",
-    signInDesc: "Messages are tied to your account.",
-    signIn: "Sign in",
-  },
-  fr: {
-    title: "Messages",
-    empty: "Aucune conversation pour l'instant",
-    emptyDesc: "Vos conversations avec les fournisseurs et acheteurs apparaîtront ici.",
-    signInTitle: "Connectez-vous pour voir vos messages",
-    signInDesc: "Les messages sont liés à votre compte.",
-    signIn: "Se connecter",
-  },
-  ar: {
-    title: "الرسائل",
-    empty: "لا توجد محادثات بعد",
-    emptyDesc: "عندما تتواصل مع مورد أو يتواصل معك مشتري، ستظهر محادثاتك هنا.",
-    signInTitle: "سجّل الدخول لعرض رسائلك",
-    signInDesc: "الرسائل مرتبطة بحسابك.",
-    signIn: "تسجيل الدخول",
-  },
-} as const
-
 function timeAgo(iso: string, lang: string): string {
   const diffMs = Date.now() - new Date(iso).getTime()
   const mins = Math.floor(diffMs / 60000)
@@ -47,8 +20,8 @@ function timeAgo(iso: string, lang: string): string {
 }
 
 function MessagesScreen() {
-  const { lang, dir } = useLanguage()
-  const dict = LOCAL_I18N[lang as keyof typeof LOCAL_I18N] || LOCAL_I18N.en
+  const { t, lang, dir } = useLanguage()
+  const msgs = t.messages
   const { user, isLoading: authLoading } = useAuth()
 
   const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading")
@@ -82,13 +55,13 @@ function MessagesScreen() {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center space-y-3" dir={dir}>
         <MessageCircle className="size-10 text-muted-foreground/60 mx-auto" />
-        <h2 className="text-base font-black text-foreground">{dict.signInTitle}</h2>
-        <p className="text-xs text-muted-foreground">{dict.signInDesc}</p>
+        <h2 className="text-base font-black text-foreground">{msgs.signInTitle}</h2>
+        <p className="text-xs text-muted-foreground">{msgs.signInDesc}</p>
         <Link
           href="/login"
           className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-xs font-black text-white hover:opacity-90"
         >
-          {dict.signIn}
+          {msgs.signIn}
         </Link>
       </div>
     )
@@ -96,7 +69,7 @@ function MessagesScreen() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6" dir={dir}>
-      <h1 className="text-xl font-black text-foreground mb-5">{dict.title}</h1>
+      <h1 className="text-xl font-black text-foreground mb-5">{msgs.title}</h1>
 
       {status === "loading" ? (
         <div className="space-y-3">
@@ -107,8 +80,8 @@ function MessagesScreen() {
       ) : conversations.length === 0 ? (
         <div className="text-center py-16 space-y-3">
           <MessageCircle className="size-10 text-muted-foreground/60 mx-auto" />
-          <h2 className="text-sm font-black text-foreground">{dict.empty}</h2>
-          <p className="text-xs text-muted-foreground max-w-xs mx-auto">{dict.emptyDesc}</p>
+          <h2 className="text-sm font-black text-foreground">{msgs.empty}</h2>
+          <p className="text-xs text-muted-foreground max-w-xs mx-auto">{msgs.emptyDesc}</p>
         </div>
       ) : (
         <div className="space-y-2">
