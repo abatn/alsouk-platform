@@ -145,10 +145,10 @@ type Dict = {
     colSell: string;
     colCompany: string;
     colSupport: string;
-    buy: string[];
-    sell: string[];
-    company: string[];
-    support: string[];
+    buy: { label: string; href: string }[];
+    sell: { label: string; href: string }[];
+    company: { label: string; href: string }[];
+    support: { label: string; href: string }[];
     rights: string;
     terms: string;
     privacy: string;
@@ -501,6 +501,81 @@ type Dict = {
     activeTag: string;
     loadMore: string;
   };
+  trust: {
+    title: string;
+    subtitle: string;
+    tradeAssurance: {
+      title: string;
+      desc: string;
+      steps: { icon: string; title: string; desc: string }[];
+    };
+    buyerProtection: {
+      title: string;
+      desc: string;
+      features: { title: string; desc: string }[];
+    };
+    verification: {
+      title: string;
+      desc: string;
+      process: { step: number; title: string; desc: string }[];
+      badges: { name: string; desc: string; color: string }[];
+    };
+    faq: { question: string; answer: string }[];
+    cta: { title: string; desc: string; button: string };
+  };
+  about: {
+    title: string;
+    subtitle: string;
+    mission: { title: string; desc: string };
+    stats: { title: string; items: { value: string; label: string }[] };
+    team: {
+      title: string;
+      members: { name: string; role: string; bio: string }[];
+    };
+    careers: {
+      title: string;
+      desc: string;
+      values: { title: string; desc: string }[];
+      positions: { title: string; department: string; location: string }[];
+      cta: string;
+    };
+    press: {
+      title: string;
+      desc: string;
+      contact: { email: string; label: string };
+    };
+    partners: {
+      title: string;
+      desc: string;
+      categories: { name: string; items: string[] }[];
+    };
+    cta: { title: string; desc: string; button: string };
+  };
+  help: {
+    title: string;
+    subtitle: string;
+    searchPlaceholder: string;
+    faq: {
+      title: string;
+      categories: {
+        name: string;
+        items: { question: string; answer: string }[];
+      }[];
+    };
+    contact: {
+      title: string;
+      desc: string;
+      form: {
+        name: string;
+        email: string;
+        subject: string;
+        message: string;
+        submit: string;
+        success: string;
+      };
+      info: { email: string; phone: string; address: string; hours: string };
+    };
+  };
 };
 
 export const translations: Record<Lang, Dict> = {
@@ -741,19 +816,29 @@ export const translations: Record<Lang, Dict> = {
       colCompany: "Company",
       colSupport: "Support",
       buy: [
-        "Browse Categories",
-        "Request Quotes",
-        "Trade Assurance",
-        "Buyer Protection",
+        { label: "Browse Categories", href: "/categories" },
+        { label: "Request Quotes", href: "/rfq" },
+        { label: "Trade Assurance", href: "/trust#trade-assurance" },
+        { label: "Buyer Protection", href: "/trust#buyer-protection" },
       ],
       sell: [
-        "Sell on ALSOUK",
-        "Supplier Membership",
-        "Verification",
-        "Export Services",
+        { label: "Sell on ALSOUK", href: "/register" },
+        { label: "Supplier Membership", href: "/register" },
+        { label: "Verification", href: "/trust#verification" },
+        { label: "Export Services", href: "/export" },
       ],
-      company: ["About Us", "Careers", "Press", "Partners"],
-      support: ["Help Center", "Contact Us", "Shipping Guide", "Report Abuse"],
+      company: [
+        { label: "About Us", href: "/about#mission" },
+        { label: "Careers", href: "/about#careers" },
+        { label: "Press", href: "/about#press" },
+        { label: "Partners", href: "/about#partners" },
+      ],
+      support: [
+        { label: "Help Center", href: "/help" },
+        { label: "Contact Us", href: "/help#contact" },
+        { label: "Shipping Guide", href: "/export#shipping" },
+        { label: "Report Abuse", href: "mailto:abuse@alsouk.com" },
+      ],
       rights: "All rights reserved.",
       terms: "Terms",
       privacy: "Privacy",
@@ -1255,6 +1340,303 @@ export const translations: Record<Lang, Dict> = {
       activeTag: "ACTIVE",
       loadMore: "Load More Exhibitors",
     },
+    trust: {
+      title: "Trade with Confidence",
+      subtitle:
+        "How ALSOUK protects every transaction between buyers and suppliers",
+      tradeAssurance: {
+        title: "Trade Assurance",
+        desc: "Our escrow system ensures your payment is protected until you confirm delivery.",
+        steps: [
+          {
+            icon: "FileText",
+            title: "Submit RFQ",
+            desc: "Describe your product needs and receive competitive quotes within 24 hours.",
+          },
+          {
+            icon: "Shield",
+            title: "Secure Payment",
+            desc: "Pay through our escrow system. Funds are held safely until delivery is confirmed.",
+          },
+          {
+            icon: "CheckCircle",
+            title: "Confirm & Release",
+            desc: "Inspect goods, confirm satisfaction, and release payment to the supplier.",
+          },
+        ],
+      },
+      buyerProtection: {
+        title: "Buyer Protection",
+        desc: "Multiple layers of protection to ensure a safe trading experience.",
+        features: [
+          {
+            title: "Escrow Payments",
+            desc: "Your funds are held securely until you confirm satisfactory delivery.",
+          },
+          {
+            title: "Dispute Resolution",
+            desc: "Our mediation team resolves issues fairly within 48 hours.",
+          },
+          {
+            title: "Refund Policy",
+            desc: "Full refund if the supplier fails to deliver as agreed.",
+          },
+          {
+            title: "Order Tracking",
+            desc: "Real-time visibility from order placement to final delivery.",
+          },
+        ],
+      },
+      verification: {
+        title: "Supplier Verification",
+        desc: "Every supplier goes through a rigorous verification process.",
+        process: [
+          {
+            step: 1,
+            title: "Document Submission",
+            desc: "Suppliers submit business licenses, tax IDs, and export certifications.",
+          },
+          {
+            step: 2,
+            title: "Background Check",
+            desc: "Our team verifies business history, reputation, and operational capacity.",
+          },
+          {
+            step: 3,
+            title: "On-site Inspection",
+            desc: "Premium suppliers receive a factory visit and capability assessment.",
+          },
+          {
+            step: 4,
+            title: "Badge Awarded",
+            desc: "Verified suppliers receive a trust badge visible across the platform.",
+          },
+        ],
+        badges: [
+          {
+            name: "Basic",
+            desc: "Business registered and identity verified.",
+            color: "bg-blue-100 text-blue-700",
+          },
+          {
+            name: "Verified",
+            desc: "Fully vetted with documented business history.",
+            color: "bg-green-100 text-green-700",
+          },
+          {
+            name: "Premium",
+            desc: "On-site inspected with highest trust rating.",
+            color: "bg-amber-100 text-amber-700",
+          },
+        ],
+      },
+      faq: [
+        {
+          question: "How does the escrow payment work?",
+          answer:
+            "When you place an order, your payment is held in escrow. The supplier ships the goods, and once you confirm delivery and quality, the funds are released to them.",
+        },
+        {
+          question: "What if the supplier doesn't deliver?",
+          answer:
+            "If a supplier fails to deliver as agreed, our dispute resolution team will mediate. You are entitled to a full refund under our Buyer Protection policy.",
+        },
+        {
+          question: "How long does verification take?",
+          answer:
+            "Basic verification takes 2-3 business days. Premium verification with on-site inspection may take up to 2 weeks.",
+        },
+      ],
+      cta: {
+        title: "Ready to trade safely?",
+        desc: "Join thousands of businesses trading with confidence on ALSOUK.",
+        button: "Start Sourcing",
+      },
+    },
+    about: {
+      title: "About ALSOUK",
+      subtitle: "Connecting North African businesses to global markets",
+      mission: {
+        title: "Our Mission",
+        desc: "ALSOUK is on a mission to empower small and medium enterprises across North Africa by providing them with a trusted B2B marketplace. We believe every business deserves access to quality suppliers, secure trade, and growth opportunities — regardless of size.",
+      },
+      stats: {
+        title: "Our Impact in Numbers",
+        items: [
+          { value: "12,000+", label: "Verified Suppliers" },
+          { value: "480K+", label: "Products Listed" },
+          { value: "35+", label: "Industries Covered" },
+          { value: "24 h", label: "Average Quote Time" },
+        ],
+      },
+      team: {
+        title: "Our Team",
+        members: [
+          {
+            name: "Ahmed Ben Ali",
+            role: "CEO & Founder",
+            bio: "15+ years in B2B trade across North Africa and the Middle East.",
+          },
+          {
+            name: "Fatma Trabelsi",
+            role: "CTO",
+            bio: "Former tech lead at major e-commerce platforms, passionate about scalable marketplaces.",
+          },
+          {
+            name: "Mohamed Sahli",
+            role: "Head of Operations",
+            bio: "Expert in supply chain logistics and supplier verification processes.",
+          },
+        ],
+      },
+      careers: {
+        title: "Careers",
+        desc: "Join our team and help shape the future of B2B trade in North Africa.",
+        values: [
+          {
+            title: "Innovation",
+            desc: "We build solutions that matter for real businesses.",
+          },
+          {
+            title: "Trust",
+            desc: "Integrity is at the core of everything we do.",
+          },
+          { title: "Growth", desc: "We grow with our suppliers and buyers." },
+        ],
+        positions: [
+          {
+            title: "Full-Stack Developer",
+            department: "Engineering",
+            location: "Tunis",
+          },
+          {
+            title: "Supplier Relations Manager",
+            department: "Operations",
+            location: "Tunis",
+          },
+          {
+            title: "Growth Marketing Specialist",
+            department: "Marketing",
+            location: "Remote",
+          },
+        ],
+        cta: "View open positions",
+      },
+      press: {
+        title: "Press & Media",
+        desc: "For press inquiries, media kits, and partnership opportunities.",
+        contact: { email: "press@alsouk.com", label: "Press Inquiries" },
+      },
+      partners: {
+        title: "Our Partners",
+        desc: "ALSOUK works with leading organizations to deliver exceptional trade experiences.",
+        categories: [
+          {
+            name: "Logistics",
+            items: ["Tunisair Cargo", "TNT Express", "DHL Tunisia"],
+          },
+          {
+            name: "Payment",
+            items: ["BaridiMob", "Flouci", "International Wire Transfer"],
+          },
+          { name: "Technology", items: ["Supabase", "Vercel", "Stripe"] },
+        ],
+      },
+      cta: {
+        title: "Join the ALSOUK network",
+        desc: "Start trading with trusted suppliers across North Africa.",
+        button: "Get Started",
+      },
+    },
+    help: {
+      title: "Help Center",
+      subtitle: "How can we help you?",
+      searchPlaceholder: "Search for help topics...",
+      faq: {
+        title: "Frequently Asked Questions",
+        categories: [
+          {
+            name: "Getting Started",
+            items: [
+              {
+                question: "How do I create an account?",
+                answer:
+                  "Click 'Join Free' and fill in your details. You can register as a buyer or supplier.",
+              },
+              {
+                question: "Is ALSOUK free to use?",
+                answer:
+                  "Yes! Browsing, searching, and sending RFQs are completely free. Suppliers pay a small commission on completed trades.",
+              },
+            ],
+          },
+          {
+            name: "Buying",
+            items: [
+              {
+                question: "How do I request a quote?",
+                answer:
+                  "Find a product or supplier, click 'Request Quote', fill in your requirements, and submit. You'll receive quotes within 24 hours.",
+              },
+              {
+                question: "How does payment work?",
+                answer:
+                  "ALSOUK uses an escrow system. Your payment is held securely until you confirm delivery.",
+              },
+            ],
+          },
+          {
+            name: "Selling",
+            items: [
+              {
+                question: "How do I become a supplier?",
+                answer:
+                  "Register as a supplier, complete your profile, and submit verification documents. Once approved, you can list products and receive RFQs.",
+              },
+              {
+                question: "What are the fees?",
+                answer:
+                  "There are no upfront fees. ALSOUK charges a small commission on completed transactions only.",
+              },
+            ],
+          },
+          {
+            name: "Account",
+            items: [
+              {
+                question: "How do I reset my password?",
+                answer:
+                  "Click 'Forgot Password' on the login page and follow the instructions sent to your email.",
+              },
+              {
+                question: "How do I update my profile?",
+                answer:
+                  "Go to Account Settings and edit your company information, logo, and product listings.",
+              },
+            ],
+          },
+        ],
+      },
+      contact: {
+        title: "Contact Us",
+        desc: "Can't find what you're looking for? Reach out to our support team.",
+        form: {
+          name: "Your Name",
+          email: "Email Address",
+          subject: "Subject",
+          message: "Your Message",
+          submit: "Send Message",
+          success:
+            "Message sent successfully! We'll get back to you within 24 hours.",
+        },
+        info: {
+          email: "support@alsouk.com",
+          phone: "+216 71 123 456",
+          address: "Tunis, Tunisia",
+          hours: "Mon-Fri, 9:00 AM - 6:00 PM (GMT+1)",
+        },
+      },
+    },
   },
   fr: {
     nav: {
@@ -1500,23 +1882,28 @@ export const translations: Record<Lang, Dict> = {
       colCompany: "Entreprise",
       colSupport: "Support",
       buy: [
-        "Parcourir les catégories",
-        "Demander des devis",
-        "Assurance commerciale",
-        "Protection acheteur",
+        { label: "Parcourir les catégories", href: "/categories" },
+        { label: "Demander des devis", href: "/rfq" },
+        { label: "Assurance commerciale", href: "/trust#trade-assurance" },
+        { label: "Protection acheteur", href: "/trust#buyer-protection" },
       ],
       sell: [
-        "Vendre sur ALSOUK",
-        "Adhésion fournisseur",
-        "Vérification",
-        "Services d'export",
+        { label: "Vendre sur ALSOUK", href: "/register" },
+        { label: "Adhésion fournisseur", href: "/register" },
+        { label: "Vérification", href: "/trust#verification" },
+        { label: "Services d'export", href: "/export" },
       ],
-      company: ["À propos", "Carrières", "Presse", "Partenaires"],
+      company: [
+        { label: "À propos", href: "/about#mission" },
+        { label: "Carrières", href: "/about#careers" },
+        { label: "Presse", href: "/about#press" },
+        { label: "Partenaires", href: "/about#partners" },
+      ],
       support: [
-        "Centre d'aide",
-        "Nous contacter",
-        "Guide d'expédition",
-        "Signaler un abus",
+        { label: "Centre d'aide", href: "/help" },
+        { label: "Nous contacter", href: "/help#contact" },
+        { label: "Guide d'expédition", href: "/export#shipping" },
+        { label: "Signaler un abus", href: "mailto:abuse@alsouk.com" },
       ],
       rights: "Tous droits réservés.",
       terms: "Conditions",
@@ -2033,6 +2420,307 @@ export const translations: Record<Lang, Dict> = {
       activeTag: "ACTIF",
       loadMore: "Charger plus d'exposants",
     },
+    trust: {
+      title: "Commercez en toute confiance",
+      subtitle:
+        "Comment ALSOUK protège chaque transaction entre acheteurs et fournisseurs",
+      tradeAssurance: {
+        title: "Assurance commerciale",
+        desc: "Notre système d'escrow garantit que votre paiement est protégé jusqu'à confirmation de la livraison.",
+        steps: [
+          {
+            icon: "FileText",
+            title: "Soumettre une demande",
+            desc: "Décrivez vos besoins et recevez des devis compétitifs sous 24 heures.",
+          },
+          {
+            icon: "Shield",
+            title: "Paiement sécurisé",
+            desc: "Payez via notre système d'escrow. Les fonds sont sécurisés jusqu'à confirmation.",
+          },
+          {
+            icon: "CheckCircle",
+            title: "Confirmer et libérer",
+            desc: "Inspectez les marchandises, confirmez la satisfaction et libérez le paiement.",
+          },
+        ],
+      },
+      buyerProtection: {
+        title: "Protection acheteur",
+        desc: "Multiples couches de protection pour une expérience commerciale sûre.",
+        features: [
+          {
+            title: "Paiements escrow",
+            desc: "Vos fonds sont sécurisés jusqu'à confirmation de livraison satisfaisante.",
+          },
+          {
+            title: "Résolution des litiges",
+            desc: "Notre équipe de médiation résout les problèmes équitablement sous 48 heures.",
+          },
+          {
+            title: "Politique de remboursement",
+            desc: "Remboursement complet si le fournisseur ne livre pas comme convenu.",
+          },
+          {
+            title: "Suivi de commande",
+            desc: "Visibilité en temps réel du placement à la livraison finale.",
+          },
+        ],
+      },
+      verification: {
+        title: "Vérification des fournisseurs",
+        desc: "Chaque fournisseur passe par un processus de vérification rigoureux.",
+        process: [
+          {
+            step: 1,
+            title: "Soumission de documents",
+            desc: "Les fournisseurs soumettent licences commerciales, ID fiscaux et certifications d'export.",
+          },
+          {
+            step: 2,
+            title: "Vérification",
+            desc: "Notre équipe vérifie l'historique commercial, la réputation et la capacité opérationnelle.",
+          },
+          {
+            step: 3,
+            title: "Inspection sur site",
+            desc: "Les fournisseurs premium reçoivent une visite d'usine et une évaluation.",
+          },
+          {
+            step: 4,
+            title: "Badge attribué",
+            desc: "Les fournisseurs vérifiés reçoivent un badge de confiance visible sur la plateforme.",
+          },
+        ],
+        badges: [
+          {
+            name: "Basique",
+            desc: "Entreprise enregistrée et identité vérifiée.",
+            color: "bg-blue-100 text-blue-700",
+          },
+          {
+            name: "Vérifié",
+            desc: "Entièrement contrôlé avec historique commercial documenté.",
+            color: "bg-green-100 text-green-700",
+          },
+          {
+            name: "Premium",
+            desc: "Inspecté sur site avec note de confiance maximale.",
+            color: "bg-amber-100 text-amber-700",
+          },
+        ],
+      },
+      faq: [
+        {
+          question: "Comment fonctionne le paiement escrow ?",
+          answer:
+            "Lorsque vous passez commande, votre paiement est détenu en escrow. Le fournisseur expédie les marchandises, et une fois la livraison et la qualité confirmées, les fonds lui sont libérés.",
+        },
+        {
+          question: "Et si le fournisseur ne livre pas ?",
+          answer:
+            "Si un fournisseur ne livre pas comme convenu, notre équipe de médiation interviendra. Vous avez droit à un remboursement complet sous notre politique de protection acheteur.",
+        },
+        {
+          question: "Combien de temps prend la vérification ?",
+          answer:
+            "La vérification basique prend 2-3 jours ouvrables. La vérification premium avec inspection sur site peut prendre jusqu'à 2 semaines.",
+        },
+      ],
+      cta: {
+        title: "Prêt à commercer en toute sécurité ?",
+        desc: "Rejoignez des milliers d'entreprises qui font confiance à ALSOUK.",
+        button: "Commencer le sourcing",
+      },
+    },
+    about: {
+      title: "À propos d'ALSOUK",
+      subtitle:
+        "Connecter les entreprises nord-africaines aux marchés mondiaux",
+      mission: {
+        title: "Notre mission",
+        desc: "ALSOUK a pour mission de permettre aux petites et moyennes entreprises d'Afrique du Nord de se développer grâce à une place de marché B2B de confiance. Nous croyons que chaque entreprise mérite l'accès à des fournisseurs de qualité, un commerce sécurisé et des opportunités de croissance.",
+      },
+      stats: {
+        title: "Notre impact en chiffres",
+        items: [
+          { value: "12 000+", label: "Fournisseurs vérifiés" },
+          { value: "480K+", label: "Produits référencés" },
+          { value: "35+", label: "Industries couvertes" },
+          { value: "24 h", label: "Délai moyen de devis" },
+        ],
+      },
+      team: {
+        title: "Notre équipe",
+        members: [
+          {
+            name: "Ahmed Ben Ali",
+            role: "PDG & Fondateur",
+            bio: "15+ ans d'expérience dans le commerce B2B en Afrique du Nord et au Moyen-Orient.",
+          },
+          {
+            name: "Fatma Trabelsi",
+            role: "CTO",
+            bio: "Ancienne responsable technique chez des plateformes e-commerce majeures, passionnée par les marketplaces scalables.",
+          },
+          {
+            name: "Mohamed Sahli",
+            role: "Directeur des opérations",
+            bio: "Expert en logistique supply chain et processus de vérification des fournisseurs.",
+          },
+        ],
+      },
+      careers: {
+        title: "Carrières",
+        desc: "Rejoignez notre équipe et contribuez à façonner l'avenir du commerce B2B en Afrique du Nord.",
+        values: [
+          {
+            title: "Innovation",
+            desc: "Nous construisons des solutions qui comptent pour les vraies entreprises.",
+          },
+          {
+            title: "Confiance",
+            desc: "L'intégrité est au cœur de tout ce que nous faisons.",
+          },
+          {
+            title: "Croissance",
+            desc: "Nous grandissons avec nos fournisseurs et acheteurs.",
+          },
+        ],
+        positions: [
+          {
+            title: "Développeur Full-Stack",
+            department: "Ingénierie",
+            location: "Tunis",
+          },
+          {
+            title: "Responsable Relations Fournisseurs",
+            department: "Opérations",
+            location: "Tunis",
+          },
+          {
+            title: "Spécialiste Marketing Croissance",
+            department: "Marketing",
+            location: "Distanciel",
+          },
+        ],
+        cta: "Voir les postes ouverts",
+      },
+      press: {
+        title: "Presse & Médias",
+        desc: "Pour les demandes presse, kits médias et opportunités de partenariat.",
+        contact: { email: "press@alsouk.com", label: "Demandes presse" },
+      },
+      partners: {
+        title: "Nos partenaires",
+        desc: "ALSOUK collabore avec des organisations de premier plan pour offrir des expériences commerciales exceptionnelles.",
+        categories: [
+          {
+            name: "Logistique",
+            items: ["Tunisair Cargo", "TNT Express", "DHL Tunisie"],
+          },
+          {
+            name: "Paiement",
+            items: ["BaridiMob", "Flouci", "Virement bancaire international"],
+          },
+          { name: "Technologie", items: ["Supabase", "Vercel", "Stripe"] },
+        ],
+      },
+      cta: {
+        title: "Rejoignez le réseau ALSOUK",
+        desc: "Commencez à commercer avec des fournisseurs de confiance à travers l'Afrique du Nord.",
+        button: "Commencer",
+      },
+    },
+    help: {
+      title: "Centre d'aide",
+      subtitle: "Comment pouvons-nous vous aider ?",
+      searchPlaceholder: "Rechercher des sujets d'aide...",
+      faq: {
+        title: "Questions fréquentes",
+        categories: [
+          {
+            name: "Pour commencer",
+            items: [
+              {
+                question: "Comment créer un compte ?",
+                answer:
+                  "Cliquez sur 'Inscription gratuite' et remplissez vos coordonnées. Vous pouvez vous inscrire en tant qu'acheteur ou fournisseur.",
+              },
+              {
+                question: "ALSOUK est-il gratuit ?",
+                answer:
+                  "Oui ! La recherche, la navigation et l'envoi de demandes de devis sont entièrement gratuits. Les fournisseurs paient une petite commission sur les transactions effectuées.",
+              },
+            ],
+          },
+          {
+            name: "Achat",
+            items: [
+              {
+                question: "Comment demander un devis ?",
+                answer:
+                  "Trouvez un produit ou fournisseur, cliquez sur 'Demander un devis', remplissez vos besoins et soumettez. Vous recevrez des devis sous 24 heures.",
+              },
+              {
+                question: "Comment fonctionne le paiement ?",
+                answer:
+                  "ALSOUK utilise un système d'escrow. Votre paiement est sécurisé jusqu'à confirmation de livraison.",
+              },
+            ],
+          },
+          {
+            name: "Vente",
+            items: [
+              {
+                question: "Comment devenir fournisseur ?",
+                answer:
+                  "Inscrivez-vous en tant que fournisseur, complétez votre profil et soumettez vos documents de vérification. Une fois approuvé, vous pouvez lister des produits et recevoir des demandes.",
+              },
+              {
+                question: "Quels sont les frais ?",
+                answer:
+                  "Il n'y a pas de frais initiaux. ALSOUK prélève une petite commission uniquement sur les transactions effectuées.",
+              },
+            ],
+          },
+          {
+            name: "Compte",
+            items: [
+              {
+                question: "Comment réinitialiser mon mot de passe ?",
+                answer:
+                  "Cliquez sur 'Mot de passe oublié' sur la page de connexion et suivez les instructions envoyées à votre e-mail.",
+              },
+              {
+                question: "Comment modifier mon profil ?",
+                answer:
+                  "Allez dans Paramètres du compte et modifiez les informations de votre entreprise, logo et listes de produits.",
+              },
+            ],
+          },
+        ],
+      },
+      contact: {
+        title: "Nous contacter",
+        desc: "Vous ne trouvez pas ce que vous cherchez ? Contactez notre équipe support.",
+        form: {
+          name: "Votre nom",
+          email: "Adresse e-mail",
+          subject: "Sujet",
+          message: "Votre message",
+          submit: "Envoyer le message",
+          success:
+            "Message envoyé avec succès ! Nous vous répondrons sous 24 heures.",
+        },
+        info: {
+          email: "support@alsouk.com",
+          phone: "+216 71 123 456",
+          address: "Tunis, Tunisie",
+          hours: "Lun-Ven, 9h00 - 18h00 (GMT+1)",
+        },
+      },
+    },
   },
   ar: {
     nav: {
@@ -2269,14 +2957,29 @@ export const translations: Record<Lang, Dict> = {
       colCompany: "الشركة",
       colSupport: "الدعم",
       buy: [
-        "تصفّح الفئات",
-        "طلب عروض الأسعار",
-        "التأمين التجاري",
-        "حماية المشتري",
+        { label: "تصفّح الفئات", href: "/categories" },
+        { label: "طلب عروض الأسعار", href: "/rfq" },
+        { label: "التأمين التجاري", href: "/trust#trade-assurance" },
+        { label: "حماية المشتري", href: "/trust#buyer-protection" },
       ],
-      sell: ["البيع على ألسوق", "عضوية المورّد", "التوثيق", "خدمات التصدير"],
-      company: ["من نحن", "الوظائف", "الصحافة", "الشركاء"],
-      support: ["مركز المساعدة", "اتصل بنا", "دليل الشحن", "الإبلاغ عن إساءة"],
+      sell: [
+        { label: "البيع على ألسوق", href: "/register" },
+        { label: "عضوية المورّد", href: "/register" },
+        { label: "التوثيق", href: "/trust#verification" },
+        { label: "خدمات التصدير", href: "/export" },
+      ],
+      company: [
+        { label: "من نحن", href: "/about#mission" },
+        { label: "الوظائف", href: "/about#careers" },
+        { label: "الصحافة", href: "/about#press" },
+        { label: "الشركاء", href: "/about#partners" },
+      ],
+      support: [
+        { label: "مركز المساعدة", href: "/help" },
+        { label: "اتصل بنا", href: "/help#contact" },
+        { label: "دليل الشحن", href: "/export#shipping" },
+        { label: "الإبلاغ عن إساءة", href: "mailto:abuse@alsouk.com" },
+      ],
       rights: "جميع الحقوق محفوظة.",
       terms: "الشروط",
       privacy: "الخصوصية",
@@ -2772,6 +3475,285 @@ export const translations: Record<Lang, Dict> = {
       vettedTag: "معتمد ونخبة",
       activeTag: "نشط حالياً",
       loadMore: "تحميل المزيد من العارضين",
+    },
+    trust: {
+      title: "تداول بثقة",
+      subtitle: "كيف تحمي ALSOUK كل صفقة بين المشترين والموردين",
+      tradeAssurance: {
+        title: "الضمان التجاري",
+        desc: "نظام الضمان لدينا يضمن حماية دفعتك حتى تأكيد التسليم.",
+        steps: [
+          {
+            icon: "FileText",
+            title: "إرسال طلب عرض سعر",
+            desc: "صف احتياجاتك واحصل على عروض أسعار تنافسية خلال 24 ساعة.",
+          },
+          {
+            icon: "Shield",
+            title: "دفع آمن",
+            desc: "ادفع عبر نظام الضمان. الأموال محمية حتى تأكيد التسليم.",
+          },
+          {
+            icon: "CheckCircle",
+            title: "تأكيد وإصدار",
+            desc: "افحص البضائع، أكيد الرضا، وأصدر الدفع للمورد.",
+          },
+        ],
+      },
+      buyerProtection: {
+        title: "حماية المشتري",
+        desc: "طباعات حماية متعددة لتجربة تجارية آمنة.",
+        features: [
+          { title: "دفع ضمان", desc: "أموالك محمية حتى تأكيد التسليم الراضي." },
+          {
+            title: "حل النزاعات",
+            desc: "فريق الوساطة لدينا يحل المشاكل بإنصاف خلال 48 ساعة.",
+          },
+          {
+            title: "سياسة الاسترداد",
+            desc: "استرداد كامل إذا لم يقدم المورد كما اتفق.",
+          },
+          {
+            title: "تتبع الطلب",
+            desc: "رؤية فورية من تقديم الطلب إلى التسليم النهائي.",
+          },
+        ],
+      },
+      verification: {
+        title: "توثيق الموردين",
+        desc: "كل مورد يمر بعملية توثيق صارمة.",
+        process: [
+          {
+            step: 1,
+            title: "تقديم المستندات",
+            desc: "يقدم الموردون رخص الأعمال، المعرف الضريبي وشهادات التصدير.",
+          },
+          {
+            step: 2,
+            title: "التحقق",
+            desc: "فريقنا يتحقق من سجل الأعمال والسمعة والقدرة التشغيلية.",
+          },
+          {
+            step: 3,
+            title: "فحص ميداني",
+            desc: "الموردون المتميزون يحصلون على زيارة مصنع وتقييم القدرات.",
+          },
+          {
+            step: 4,
+            title: "إعطاء الشارة",
+            desc: "يحصل الموردون الموثقون على شارة ثقة مرئية عبر المنصة.",
+          },
+        ],
+        badges: [
+          {
+            name: "أساسي",
+            desc: "شركة مسجلة والهوية موثقة.",
+            color: "bg-blue-100 text-blue-700",
+          },
+          {
+            name: "موثق",
+            desc: "محقق بالكامل مع سجل أعمال موثق.",
+            color: "bg-green-100 text-green-700",
+          },
+          {
+            name: "مميز",
+            desc: "تم فحشه ميدانياً مع أعلى تقييم ثقة.",
+            color: "bg-amber-100 text-amber-700",
+          },
+        ],
+      },
+      faq: [
+        {
+          question: "كيف يعمل الدفع بالضمان؟",
+          answer:
+            "عند تقديم طلب، يتم الاحتفاظ بדفعتك في الضمان. يشحن المورد البضائع، وبمجرد تأكيد التسليم والجودة، يتم إصدار الأموال لهم.",
+        },
+        {
+          question: "ماذا إذا لم يشحن المورد؟",
+          answer:
+            "إذا لم يشحن المورد كما اتفق، س主题介入 فريق الوساطة. لديك الحق في استرداد كامل بموجب سياسة حماية المشتري.",
+        },
+        {
+          question: "كم تستغرق عملية التوثيق؟",
+          answer:
+            "التوثيق الأساسي يستغرق 2-3 أيام عمل. التوثيق المتميز مع الفحص الميداني قد يستغرق أسبوعين.",
+        },
+      ],
+      cta: {
+        title: "مستعد للتداول بأمان؟",
+        desc: "انضم إلى آلاف الشركات التي تتداول بثقة على ALSOUK.",
+        button: "ابدأ التوريد",
+      },
+    },
+    about: {
+      title: "عن ALSOUK",
+      subtitle: "ربط الشركات شمال إفريقية بالأسواق العالمية",
+      mission: {
+        title: "مهمتنا",
+        desc: "ALSOUK مهمتها تمكين الشركات الصغيرة والمتوسطة في شمال إفريقيا من النمو من خلال سوق B2B موثوق. نؤمن بأن كل شركة تستحق الوصول إلى موردين ذوي جودة وتجارة آمنة وفرص نمو — بغض النظر عن الحجم.",
+      },
+      stats: {
+        title: "أثرنا بالأرقام",
+        items: [
+          { value: "+12,000", label: "مورّد موثّق" },
+          { value: "+480 ألف", label: "منتج مدرج" },
+          { value: "+35", label: "صناعة مغطاة" },
+          { value: "24 س", label: "متوسط وقت العرض" },
+        ],
+      },
+      team: {
+        title: "فريقنا",
+        members: [
+          {
+            name: "أحمد بن علي",
+            role: "الرئيس التنفيذي والمؤسس",
+            bio: "أكثر من 15 عاماً في التجارة B2B عبر شمال إفريقيا والشرق الأوسط.",
+          },
+          {
+            name: "فاطمة الطريبلسي",
+            role: "المدير التقني",
+            bio: "쿠폰 리더 سابقة في منصات التجارة الإلكترونية الكبرى، شغوفة بالأسواق القابلة للتطوير.",
+          },
+          {
+            name: "محمد الساهلي",
+            role: " مدير العمليات",
+            bio: "خبير في لوجستيات سلسلة التوريد وعمليات توثيق الموردين.",
+          },
+        ],
+      },
+      careers: {
+        title: "التوظيف",
+        desc: "انضم إلى فريقنا وساهم في تشكيل مستقبل التجارة B2B في شمال إفريقيا.",
+        values: [
+          { title: "الابتكار", desc: "نبني حلولاً مهمة للشركات الحقيقية." },
+          { title: "الثقة", desc: "النزاهة في جوهر كل ما نفعله." },
+          { title: "النمو", desc: "ننمو مع موردينا ومشترين." },
+        ],
+        positions: [
+          { title: "مطور Full-Stack", department: "الهندسة", location: "تونس" },
+          {
+            title: "مدير علاقات الموردين",
+            department: "العمليات",
+            location: "تونس",
+          },
+          {
+            title: "متخصص تسويق النمو",
+            department: "التسويق",
+            location: "عن بُعد",
+          },
+        ],
+        cta: "عرض الوظائف المفتوحة",
+      },
+      press: {
+        title: "الصحافة والإعلام",
+        desc: "للطلبات الصحفية و킷ات الإعلام وفرص الشراكة.",
+        contact: { email: "press@alsouk.com", label: "الطلبات الصحفية" },
+      },
+      partners: {
+        title: "شركاؤنا",
+        desc: "ALSOUK يتعاون مع منظمات رائدة لتقديم تجارب تجارية استثنائية.",
+        categories: [
+          {
+            name: "اللوجستيات",
+            items: ["Tunisair Cargo", "TNT Express", "DHL تونس"],
+          },
+          { name: "الدفع", items: ["BaridiMob", "Flouci", "تحويل بنكي دولي"] },
+          { name: "التكنولوجيا", items: ["Supabase", "Vercel", "Stripe"] },
+        ],
+      },
+      cta: {
+        title: "انضم إلى شبكة ALSOUK",
+        desc: "ابدأ التجارة مع موردين موثوقين عبر شمال إفريقيا.",
+        button: "ابدأ الآن",
+      },
+    },
+    help: {
+      title: "مركز المساعدة",
+      subtitle: "كيف يمكننا مساعدتك؟",
+      searchPlaceholder: "ابحث عن مواضيع المساعدة...",
+      faq: {
+        title: "الأسئلة الشائعة",
+        categories: [
+          {
+            name: "البدء",
+            items: [
+              {
+                question: "كيف أنشئ حساباً؟",
+                answer:
+                  "انقر على 'انضم مجاناً' واملأ بياناتك. يمكنك التسجيل كمشترٍ أو مورّد.",
+              },
+              {
+                question: "هل ALSOUK مجاني؟",
+                answer:
+                  "نعم! التصفح والبحث وإرسال طلبات عروض الأسعار مجاني تماماً. الموردون يدفعون عمولة صغيرة على المعاملات المنجزة.",
+              },
+            ],
+          },
+          {
+            name: "الشراء",
+            items: [
+              {
+                question: "كيف أطلب عرض سعر؟",
+                answer:
+                  "ابحث عن منتج أو مورّد، انقر على 'طلب عرض سعر'، صِف احتياجاتك وأرسل. ستحصل على عروض أسعار خلال 24 ساعة.",
+              },
+              {
+                question: "كيف يعمل الدفع؟",
+                answer:
+                  "ALSOUK يستخدم نظام الضمان. دفعتك محمية حتى تأكيد التسليم.",
+              },
+            ],
+          },
+          {
+            name: "البيع",
+            items: [
+              {
+                question: "كيف أ成为一个مورد؟",
+                answer:
+                  "سجّل كمورد، أكمل ملفك الشخصي، وأرسل مستندات التوثيق. بمجرد الموافقة، يمكنك عرض المنتجات واستقبال الطلبات.",
+              },
+              {
+                question: "ما هي الرسوم؟",
+                answer:
+                  "لا توجد رسوم مقدمة. ALSOUK يأخذ عمولة صغيرة فقط على المعاملات المنجزة.",
+              },
+            ],
+          },
+          {
+            name: "الحساب",
+            items: [
+              {
+                question: "كيف أعيد تعيين كلمة المرور؟",
+                answer:
+                  "انقر على 'نسيت كلمة المرور' في صفحة تسجيل الدخول واتبع التعليمات المرسلة إلى بريدك الإلكتروني.",
+              },
+              {
+                question: "كيف أحدّث ملفي الشخصي؟",
+                answer:
+                  "انتقل إلى إعدادات الحساب وعدّل معلومات شركتك وشعارك وقوائم المنتجات.",
+              },
+            ],
+          },
+        ],
+      },
+      contact: {
+        title: "اتصل بنا",
+        desc: "لم تجد ما تبحث عنه؟ تواصل مع فريق الدعم.",
+        form: {
+          name: "اسمك",
+          email: "البريد الإلكتروني",
+          subject: "الموضوع",
+          message: "رسالتك",
+          submit: "إرسال الرسالة",
+          success: "تم إرسال الرسالة بنجاح! سنتواصل معك خلال 24 ساعة.",
+        },
+        info: {
+          email: "support@alsouk.com",
+          phone: "+216 71 123 456",
+          address: "تونس، تونس",
+          hours: "الاثنين-الجمعة، 9:00 - 18:00 ( GMT+1)",
+        },
+      },
     },
   },
 };
