@@ -424,17 +424,6 @@ on conflict (id) do nothing;
 
 insert into public.products (id, store_id, company_id, name, slug, description, price, currency, min_order_quantity, unit, stock_quantity, is_active)
 select
-  'a1b2c3d4-e5f6-7890-abcd-300000000023',
-  s.id, s.company_id,
-  'Figues Sèches 500g',
-  'figues-seches-500g',
-  'Figues sèches de qualité supérieure, sans additifs.',
-  18.00, 'TND', 12, 'pack', 200, true
-from public.stores s where s.slug = 'i3c-plus-store'
-on conflict (id) do nothing;
-
-insert into public.products (id, store_id, company_id, name, slug, description, price, currency, min_order_quantity, unit, stock_quantity, is_active)
-select
   'a1b2c3d4-e5f6-7890-abcd-300000000024',
   s.id, s.company_id,
   'Pâte d''Amandes 200g',
@@ -470,7 +459,7 @@ on conflict (id) do nothing;
 insert into public.product_categories (product_id, category_id)
 select p.id, c.id
 from public.products p, public.categories c
-where p.slug in ('huile-olive-bio-750ml', 'dattes-deglet-nour-250g', 'dattes-epinees-500g', 'huile-olive-250ml', 'couscous-bio-1kg', 'pate-harissa-250g', 'figues-seches-500g', 'pate-amandes-200g', 'eau-fleur-oranger-500ml', 'eau-rose-250ml')
+where p.slug in ('huile-olive-bio-750ml', 'dattes-deglet-nour-250g', 'dattes-epinees-500g', 'huile-olive-250ml', 'couscous-bio-1kg', 'pate-harissa-250g', 'pate-amandes-200g', 'eau-fleur-oranger-500ml', 'eau-rose-250ml')
   and c.slug = 'food'
 on conflict (product_id, category_id) do nothing;
 
