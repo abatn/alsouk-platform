@@ -1,27 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import Link from "next/link"
-import { Check, ChevronDown, Globe, Menu, X } from "lucide-react"
-import { useLanguage } from "@/components/language-provider"
-import { LANGS } from "@/lib/i18n"
-import { NotificationBell } from "@/components/marketplace/notification-bell"
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Check, ChevronDown, Globe, Menu, X } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import { LANGS } from "@/lib/i18n";
+import { NotificationBell } from "@/components/marketplace/notification-bell";
 
 export function SiteHeader() {
-  const { t, lang, setLang } = useLanguage()
-  const [langOpen, setLangOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const langRef = useRef<HTMLDivElement>(null)
+  const { t, lang, setLang } = useLanguage();
+  const [langOpen, setLangOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false)
+      if (langRef.current && !langRef.current.contains(e.target as Node))
+        setLangOpen(false);
     }
-    document.addEventListener("mousedown", onClick)
-    return () => document.removeEventListener("mousedown", onClick)
-  }, [])
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
 
-  const current = LANGS.find((l) => l.code === lang)!
+  const current = LANGS.find((l) => l.code === lang)!;
 
   const LangSwitcher = (
     <div className="relative" ref={langRef}>
@@ -34,7 +35,9 @@ export function SiteHeader() {
       >
         <Globe className="size-3.5 text-primary/80" />
         <span>{current.native}</span>
-        <ChevronDown className={`size-3 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`size-3 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
+        />
       </button>
       {langOpen && (
         <div
@@ -47,14 +50,16 @@ export function SiteHeader() {
               role="option"
               aria-selected={l.code === lang}
               onClick={() => {
-                setLang(l.code)
-                setLangOpen(false)
+                setLang(l.code);
+                setLangOpen(false);
               }}
               className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs text-popover-foreground transition-colors hover:bg-secondary/80"
             >
               <span className="flex flex-col items-start text-start">
                 <span className="font-semibold">{l.native}</span>
-                <span className="text-[10px] text-muted-foreground">{l.label}</span>
+                <span className="text-[10px] text-muted-foreground">
+                  {l.label}
+                </span>
               </span>
               {l.code === lang && <Check className="size-3.5 text-primary" />}
             </button>
@@ -62,18 +67,24 @@ export function SiteHeader() {
         </div>
       )}
     </div>
-  )
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full h-16 border-b border-border/40 bg-background/70 backdrop-blur-lg flex items-center">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 flex items-center justify-between">
         {/* ALSOUK Logo */}
-        <Link href="/" className="flex items-center gap-2 group transition-transform duration-200">
+        <Link
+          href="/"
+          className="flex items-center gap-2 group transition-transform duration-200"
+        >
           <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary to-blue-600 font-black text-sm text-primary-foreground shadow-md shadow-primary/20 group-hover:scale-105 transition-all">
             A
           </span>
           <span className="text-lg font-black tracking-tight text-foreground">
-            AL<span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">SOUK</span>
+            AL
+            <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+              SOUK
+            </span>
           </span>
         </Link>
 
@@ -90,7 +101,11 @@ export function SiteHeader() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Menu"
           >
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {mobileOpen ? (
+              <X className="size-5" />
+            ) : (
+              <Menu className="size-5" />
+            )}
           </button>
         </div>
       </div>
@@ -104,21 +119,21 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(false)}
               className="rounded-xl px-4 py-3 text-xs font-bold text-foreground transition-all hover:bg-secondary/60"
             >
-              Home
+              {t.bottomNav.home}
             </Link>
             <Link
               href="/categories"
               onClick={() => setMobileOpen(false)}
               className="rounded-xl px-4 py-3 text-xs font-bold text-foreground transition-all hover:bg-secondary/60"
             >
-              Categories
+              {t.nav.categories}
             </Link>
             <Link
               href="/rfq"
               onClick={() => setMobileOpen(false)}
               className="rounded-xl px-4 py-3 text-xs font-bold text-foreground transition-all hover:bg-secondary/60"
             >
-              Request Quote
+              {t.nav.rfq}
             </Link>
             <Link
               href="/suppliers"
@@ -138,5 +153,5 @@ export function SiteHeader() {
         </div>
       )}
     </header>
-  )
+  );
 }

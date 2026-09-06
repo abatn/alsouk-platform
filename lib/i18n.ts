@@ -95,6 +95,31 @@ type Dict = {
     detailsPlaceholder: string;
     submit: string;
     note: string;
+    store: {
+      cta: string;
+      title: string;
+      desc: string;
+      companyName: string;
+      contactPerson: string;
+      email: string;
+      phone: string;
+      country: string;
+      deliveryDestination: string;
+      productRequested: string;
+      quantity: string;
+      targetPrice: string;
+      message: string;
+      send: string;
+      sending: string;
+      successTitle: string;
+      successDesc: string;
+      close: string;
+      errRequired: string;
+      errEmail: string;
+      errPhone: string;
+      errMessage: string;
+      errGeneric: string;
+    };
   };
   why: {
     title: string;
@@ -634,6 +659,31 @@ export const translations: Record<Lang, Dict> = {
       detailsPlaceholder: "Describe specifications, packaging, delivery...",
       submit: "Get Free Quotes",
       note: "Free to post. No commitment required.",
+      store: {
+        cta: "Request Quote",
+        title: "Request a quote from",
+        desc: "Send your requirements directly to this supplier.",
+        companyName: "Your Company Name",
+        contactPerson: "Contact Person",
+        email: "Email",
+        phone: "Phone",
+        country: "Country",
+        deliveryDestination: "Delivery Destination",
+        productRequested: "Product Requested",
+        quantity: "Quantity",
+        targetPrice: "Target Price (optional)",
+        message: "Message *",
+        send: "Send Request",
+        sending: "Sending...",
+        successTitle: "Request submitted successfully!",
+        successDesc: "The supplier will review your request and reply shortly.",
+        close: "Close",
+        errRequired: "This field is required.",
+        errEmail: "Enter a valid email address.",
+        errPhone: "Enter a valid phone number.",
+        errMessage: "Please provide at least 10 characters.",
+        errGeneric: "Something went wrong. Please try again.",
+      },
     },
     why: {
       title: "Why Choose ALSOUK",
@@ -1364,6 +1414,32 @@ export const translations: Record<Lang, Dict> = {
       detailsPlaceholder: "Spécifications, emballage, livraison...",
       submit: "Obtenir des devis gratuits",
       note: "Gratuit et sans engagement.",
+      store: {
+        cta: "Demander un devis",
+        title: "Demander un devis à",
+        desc: "Envoyez vos besoins directement à ce fournisseur.",
+        companyName: "Nom de votre entreprise",
+        contactPerson: "Personne à contacter",
+        email: "E-mail",
+        phone: "Téléphone",
+        country: "Pays",
+        deliveryDestination: "Destination de livraison",
+        productRequested: "Produit demandé",
+        quantity: "Quantité",
+        targetPrice: "Prix cible (optionnel)",
+        message: "Message *",
+        send: "Envoyer la demande",
+        sending: "Envoi...",
+        successTitle: "Demande envoyée avec succès !",
+        successDesc:
+          "Le fournisseur examinera votre demande et répondra sous peu.",
+        close: "Fermer",
+        errRequired: "Ce champ est requis.",
+        errEmail: "Entrez une adresse e-mail valide.",
+        errPhone: "Entrez un numéro de téléphone valide.",
+        errMessage: "Veuillez fournir au moins 10 caractères.",
+        errGeneric: "Une erreur s'est produite. Réessayez.",
+      },
     },
     why: {
       title: "Pourquoi choisir ALSOUK",
@@ -2112,6 +2188,31 @@ export const translations: Record<Lang, Dict> = {
       detailsPlaceholder: "صف المواصفات والتغليف والتسليم...",
       submit: "احصل على عروض مجانية",
       note: "النشر مجاني وبدون أي التزام.",
+      store: {
+        cta: "طلب عرض سعر",
+        title: "طلب عرض سعر من",
+        desc: "أرسل متطلباتك مباشرة إلى هذا المورد.",
+        companyName: "اسم شركتك",
+        contactPerson: "الشخص المسؤول",
+        email: "البريد الإلكتروني",
+        phone: "الهاتف",
+        country: "البلد",
+        deliveryDestination: "وجهة التسليم",
+        productRequested: "المنتج المطلوب",
+        quantity: "الكمية",
+        targetPrice: "السعر المستهدف (اختياري)",
+        message: "الرسالة *",
+        send: "إرسال الطلب",
+        sending: "جارٍ الإرسال...",
+        successTitle: "تم إرسال الطلب بنجاح!",
+        successDesc: "سيقوم المورد بمراجعة طلبك والرد عليك قريباً.",
+        close: "إغلاق",
+        errRequired: "هذا الحقل مطلوب.",
+        errEmail: "أدخل بريدًا إلكترونيًا صالحًا.",
+        errPhone: "أدخل رقم هاتف صالحًا.",
+        errMessage: "يرجى إدخال 10 أحرف على الأقل.",
+        errGeneric: "حدث خطأ. حاول مرة أخرى.",
+      },
     },
     why: {
       title: "لماذا تختار ألسوق",

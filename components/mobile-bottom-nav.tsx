@@ -1,9 +1,16 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Home, LayoutGrid, FileText, MessageSquare, User, Video } from "lucide-react"
-import { useLanguage } from "@/components/language-provider"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Home,
+  LayoutGrid,
+  FileText,
+  MessageSquare,
+  User,
+  Video,
+} from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
 
 /**
  * Mobile app-style bottom navigation. Fixed to the viewport bottom.
@@ -11,26 +18,20 @@ import { useLanguage } from "@/components/language-provider"
  * Tabs: Home, Categories, RFQ, Messages, Account.
  */
 export function MobileBottomNav() {
-  const { lang } = useLanguage()
-  const pathname = usePathname()
-
-  const homeLabels: Record<string, string> = { en: "Home", fr: "Accueil", ar: "الرئيسية" }
-  const categoriesLabels: Record<string, string> = { en: "Categories", fr: "Catégories", ar: "الفئات" }
-  const rfqLabels: Record<string, string> = { en: "RFQ", fr: "RFQ", ar: "طلبات الأسعار" }
-  const messagesLabels: Record<string, string> = { en: "Messages", fr: "Messages", ar: "الرسائل" }
-  const accountLabels: Record<string, string> = { en: "Account", fr: "Compte", ar: "الحساب" }
+  const { t } = useLanguage();
+  const pathname = usePathname();
 
   const tabs = [
-    { href: "/", label: homeLabels[lang] || homeLabels["en"], icon: Home },
-    { href: "/categories", label: categoriesLabels[lang] || categoriesLabels["en"], icon: LayoutGrid },
-    { href: "/rfq", label: rfqLabels[lang] || rfqLabels["en"], icon: FileText },
-    { href: "/messages", label: messagesLabels[lang] || messagesLabels["en"], icon: MessageSquare },
-    { href: "/account", label: accountLabels[lang] || accountLabels["en"], icon: User },
-  ]
+    { href: "/", label: t.bottomNav.home, icon: Home },
+    { href: "/categories", label: t.bottomNav.categories, icon: LayoutGrid },
+    { href: "/rfq", label: t.nav.rfq, icon: FileText },
+    { href: "/messages", label: t.bottomNav.messages, icon: MessageSquare },
+    { href: "/account", label: t.bottomNav.account, icon: User },
+  ];
 
   function isActive(href: string) {
-    if (href === "/") return pathname === "/"
-    return pathname === href || pathname.startsWith(`${href}/`)
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
   }
 
   return (
@@ -41,8 +42,8 @@ export function MobileBottomNav() {
     >
       <ul className="w-full flex items-stretch justify-between px-2">
         {tabs.map((tab) => {
-          const active = isActive(tab.href)
-          const Icon = tab.icon
+          const active = isActive(tab.href);
+          const Icon = tab.icon;
           return (
             <li key={tab.href} className="flex-1">
               <Link
@@ -52,10 +53,15 @@ export function MobileBottomNav() {
               >
                 <span
                   className={`flex size-8 items-center justify-center rounded-full transition-colors ${
-                    active ? "bg-primary/10 text-primary" : "text-muted-foreground group-hover:text-foreground"
+                    active
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground group-hover:text-foreground"
                   }`}
                 >
-                  <Icon className="size-[1.25rem]" strokeWidth={active ? 2.4 : 2} />
+                  <Icon
+                    className="size-[1.25rem]"
+                    strokeWidth={active ? 2.4 : 2}
+                  />
                 </span>
                 <span
                   className={`text-[10px] font-semibold leading-none ${
@@ -66,9 +72,9 @@ export function MobileBottomNav() {
                 </span>
               </Link>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
+  );
 }
