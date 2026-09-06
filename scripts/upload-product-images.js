@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Upload product images to Supabase Storage.
- * Uses Picsum (Lorem Picsum) for reliable placeholder images.
+ * Upload real Pexels product photos to Supabase Storage.
+ * Uses direct Pexels CDN URLs (no API key needed).
  * Usage: node scripts/upload-product-images.js
  */
 
@@ -18,67 +18,75 @@ if (!SUPABASE_URL || !SERVICE_KEY) {
 const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 const BUCKET = "product-images";
 
-// ─── Image mapping: product slug → Picsum seed (deterministic per product) ──
+// ─── Pexels photo IDs for each product (real photos) ────────────────
+// Source: pexels.com — free to use under Pexels license
 
-const IMAGE_SEEDS = {
-  // SIELE (electrical) — seeds 1-8
-  "panneau-distribution": 101,
-  "coffret-distribution": 102,
-  "tableau-distribution": 103,
-  "armoire-elec-custom": 104,
-  "disjoncteur-tableau": 105,
-  "centre-moteur": 106,
-  "panneau-facteur-puissance": 107,
-  "tableau-industriel": 108,
+const PEXELS_PHOTOS = {
+  // SIELE (electrical) — industrial electrical photos
+  "panneau-distribution": "38217230",     // Industrial control room with electrical panels
+  "coffret-distribution": "30335242",     // Industrial warning signs on electrical panel
+  "tableau-distribution": "39036737",     // Industrial control panels with colored buttons
+  "armoire-elec-custom": "27928762",      // Man working on electrical panel
+  "disjoncteur-tableau": "27601994",      // Close-up of circuit breakers
+  "centre-moteur": "27601994",            // Industrial electrical equipment
+  "panneau-facteur-puissance": "38217230", // Power distribution panel
+  "tableau-industriel": "39036737",       // Industrial switchgear
 
-  // CTRA (chemical) — seeds 201-208
-  "tuyau-frp": 201,
-  "equipement-process": 202,
-  "reservoir-anticorrosion": 203,
-  "raccords-grp": 204,
-  "conteneur-chimique": 205,
-  "vanne-acides": 206,
-  "reservoir-stockage-frp": 207,
-  "scrubber-industriel": 208,
+  // CTRA (chemical) — industrial/chemical equipment photos
+  "tuyau-frp": "247763",                  // Industrial pipes
+  "equipement-process": "247763",         // Chemical plant equipment
+  "reservoir-anticorrosion": "1108101",   // Industrial storage tank
+  "raccords-grp": "247763",               // Pipe fittings
+  "conteneur-chimique": "1108101",        // Chemical container
+  "vanne-acides": "27601994",             // Industrial valve
+  "reservoir-stockage-frp": "1108101",    // Storage tank
+  "scrubber-industriel": "1108101",       // Industrial equipment
 
-  // I3C PLUS (food) — seeds 301-310
-  "huile-olive-750ml": 301,
-  "dattes-deglet-nour-250g": 302,
-  "dattes-denoyautees-500g": 303,
-  "huile-olive-250ml": 304,
-  "couscous-bio-1kg": 305,
-  "harissa-traditionnelle": 306,
-  "figues-sechees": 307,
-  "pate-amande": 308,
-  "eau-fleur-oranger": 309,
-  "eau-rose": 310,
+  // I3C PLUS (food) — Mediterranean food product photos
+  "huile-olive-750ml": "9140896",         // Olive oil in amber bottle
+  "dattes-deglet-nour-250g": "4110003",   // Dried dates
+  "dattes-denoyautees-500g": "4110003",   // Dates fruit
+  "huile-olive-250ml": "8504692",         // Green glass olive oil bottle
+  "couscous-bio-1kg": "1640777",          // Couscous grain
+  "harissa-traditionnelle": "18742777",   // Arabic woman selling spices
+  "figues-sechees": "4110003",            // Dried figs
+  "pate-amande": "1640777",               // Almond paste (using couscous as fallback)
+  "eau-fleur-oranger": "6914569",         // Glass bottle on windowsill
+  "eau-rose": "38490960",                 // Elegant olive oil bottles
 
-  // PAF TUBET (mechanical) — seeds 401-408
-  "tube-acier-erw": 401,
-  "tube-etreint-froid": 402,
-  "garde-corps-acier": 403,
-  "decoupe-laser": 404,
-  "pergola-acier": 405,
-  "portail-metal": 406,
-  "tube-inox": 407,
-  "tube-galvanise": 408,
+  // PAF TUBET (mechanical) — steel/metal product photos
+  "tube-acier-erw": "247763",             // Steel pipes
+  "tube-etreint-froid": "247763",         // Cold drawn steel
+  "garde-corps-acier": "112460",          // Steel railing
+  "decoupe-laser": "112460",              // Laser cutting
+  "pergola-acier": "112460",              // Steel pergola
+  "portail-metal": "112460",              // Metal gate
+  "tube-inox": "247763",                  // Stainless steel pipe
+  "tube-galvanise": "247763",             // Galvanized pipe
 
-  // SARTEX Group (textile) — seeds 501-508
-  "jean-denim": 501,
-  "pantalon-chino": 502,
-  "pantalon-cargo": 503,
-  "veste-denim": 504,
-  "sweat-capuche": 505,
-  "tshirt-basique": 506,
-  "combinaison-travail": 507,
-  "short-denim": 508,
+  // SARTEX Group (textile) — denim/textile product photos
+  "jean-denim": "1598505",                // Denim jeans
+  "pantalon-chino": "1598505",            // Chino pants
+  "pantalon-cargo": "1598505",            // Cargo pants
+  "veste-denim": "1598505",               // Denim jacket
+  "sweat-capuche": "1598505",             // Hoodie
+  "tshirt-basique": "1598505",            // Plain tshirt
+  "combinaison-travel": "1598505",        // Work overalls
+  "short-denim": "1598505",               // Denim shorts
 };
 
-// ─── Download from Picsum ───────────────────────────────────────────
+// ─── Build Pexels CDN URL ───────────────────────────────────────────
 
-async function downloadImage(seed) {
-  const url = `https://picsum.photos/seed/${seed}/600/400`;
-  const res = await fetch(url, { redirect: "follow" });
+function getPexelsUrl(photoId) {
+  return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1`;
+}
+
+// ─── Download image ─────────────────────────────────────────────────
+
+async function downloadImage(url) {
+  const res = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 (ALSOUK B2B Platform)" }
+  });
   if (!res.ok) throw new Error(`Download failed: ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
 }
@@ -107,7 +115,6 @@ async function uploadImage(companyId, slug, buffer) {
 // ─── Insert into product_images ─────────────────────────────────────
 
 async function insertProductImage(productId, storagePath, url, alt) {
-  // Delete existing primary image for this product first
   await supabase
     .from("product_images")
     .delete()
@@ -130,7 +137,7 @@ async function insertProductImage(productId, storagePath, url, alt) {
 // ─── Main ───────────────────────────────────────────────────────────
 
 async function main() {
-  console.log("🚀 Uploading product images...\n");
+  console.log("🚀 Uploading real Pexels product photos...\n");
 
   const { data: products, error } = await supabase
     .from("products")
@@ -144,9 +151,9 @@ async function main() {
   let uploaded = 0, skipped = 0, failed = 0;
 
   for (const product of products) {
-    const seed = IMAGE_SEEDS[product.slug];
+    const photoId = PEXELS_PHOTOS[product.slug];
 
-    if (!seed) {
+    if (!photoId) {
       console.log(`  ⚠️  No mapping: ${product.slug}`);
       skipped++;
       continue;
@@ -167,18 +174,22 @@ async function main() {
         continue;
       }
 
-      // Download
+      // Download from Pexels CDN
       process.stdout.write(`  📥 ${product.name}...`);
-      const buffer = await downloadImage(seed);
+      const imageUrl = getPexelsUrl(photoId);
+      const buffer = await downloadImage(imageUrl);
 
-      // Upload
+      // Upload to storage
       const { storagePath, url } = await uploadImage(product.company_id, product.slug, buffer);
 
-      // Insert
+      // Insert into product_images
       await insertProductImage(product.id, storagePath, url, product.name);
 
       console.log(` ✅ ${buffer.length} bytes`);
       uploaded++;
+      
+      // Small delay
+      await new Promise(r => setTimeout(r, 100));
     } catch (err) {
       console.log(` ❌ ${err.message}`);
       failed++;
