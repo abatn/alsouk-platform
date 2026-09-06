@@ -1,33 +1,45 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { ArrowRight, Search, ShieldCheck, Sparkles, TrendingUp } from "lucide-react"
-import { buttonVariants } from "@/components/ui/button"
-import { useLanguage } from "@/components/language-provider"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  ArrowRight,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+} from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { useLanguage } from "@/components/language-provider";
+import { getPopularTerms } from "@/lib/category-i18n";
 
 export function HeroSection() {
-  const { t } = useLanguage()
-  const router = useRouter()
-  const [query, setQuery] = useState("")
+  const { t, lang } = useLanguage();
+  const router = useRouter();
+  const [query, setQuery] = useState("");
 
   function goSearch(term?: string) {
-    const q = (term ?? query).trim()
-    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search")
+    const q = (term ?? query).trim();
+    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
   }
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background py-16 lg:py-28">
       {/* Decorative ambient glowing grids and spheres */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden className="pointer-events-none absolute -start-44 -top-44 -z-10 size-[450px] rounded-full bg-primary/8 blur-[120px] transition-opacity duration-1000" />
-      <div aria-hidden className="pointer-events-none absolute -end-24 top-24 -z-10 size-[380px] rounded-full bg-accent/8 blur-[100px] transition-opacity duration-1000" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -start-44 -top-44 -z-10 size-[450px] rounded-full bg-primary/8 blur-[120px] transition-opacity duration-1000"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -end-24 top-24 -z-10 size-[380px] rounded-full bg-accent/8 blur-[100px] transition-opacity duration-1000"
+      />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-
           {/* Left Hero content column */}
           <div className="text-center lg:col-span-7 lg:text-start">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-4 py-1.5 text-xs font-bold text-primary backdrop-blur-sm transition-all hover:border-primary/25 hover:bg-primary/8">
@@ -53,8 +65,8 @@ export function HeroSection() {
             {/* Premium redone search container with center placeholder, beautiful shadows, rounded edges */}
             <form
               onSubmit={(e) => {
-                e.preventDefault()
-                goSearch()
+                e.preventDefault();
+                goSearch();
               }}
               role="search"
               className="mx-auto mt-10 max-w-xl rounded-[24px] border border-border/80 bg-card p-2 shadow-xl shadow-primary/5 backdrop-blur transition-all duration-300 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/8 lg:mx-0"
@@ -84,8 +96,10 @@ export function HeroSection() {
 
             {/* Popular Quick-search tags */}
             <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
-              <span className="py-1 text-xs font-bold text-muted-foreground/85">{t.hero.popular}</span>
-              {t.hero.popularTerms.map((term) => (
+              <span className="py-1 text-xs font-bold text-muted-foreground/85">
+                {t.hero.popular}
+              </span>
+              {getPopularTerms(lang).map((term) => (
                 <button
                   key={term}
                   onClick={() => goSearch(term)}
@@ -100,14 +114,23 @@ export function HeroSection() {
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:items-start justify-center lg:justify-start">
               <Link
                 href="/products"
-                className={buttonVariants({ size: "lg", className: "w-full sm:w-auto rounded-xl bg-gradient-to-r from-primary to-blue-600 px-8 text-xs font-bold text-primary-foreground shadow-md hover:opacity-95 hover:shadow-lg" })}
+                className={buttonVariants({
+                  size: "lg",
+                  className:
+                    "w-full sm:w-auto rounded-xl bg-gradient-to-r from-primary to-blue-600 px-8 text-xs font-bold text-primary-foreground shadow-md hover:opacity-95 hover:shadow-lg",
+                })}
               >
                 <span>{t.hero.ctaPrimary}</span>
                 <ArrowRight className="size-4 ms-1.5 rtl:rotate-180 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/rfq"
-                className={buttonVariants({ size: "lg", variant: "outline", className: "w-full sm:w-auto rounded-xl border-border bg-background/50 px-8 text-xs font-bold text-foreground hover:bg-muted/80" })}
+                className={buttonVariants({
+                  size: "lg",
+                  variant: "outline",
+                  className:
+                    "w-full sm:w-auto rounded-xl border-border bg-background/50 px-8 text-xs font-bold text-foreground hover:bg-muted/80",
+                })}
               >
                 {t.hero.ctaSecondary}
               </Link>
@@ -138,16 +161,23 @@ export function HeroSection() {
                 className="object-cover transition-transform duration-1000 hover:scale-[1.03]"
               />
               {/* Soft overlay mask */}
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"
+              />
               <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-background/90 p-5 shadow-lg backdrop-blur border border-white/20">
-                <p className="text-sm font-black text-foreground tracking-tight">Mediterranean trade & logistics hub</p>
-                <p className="text-xs text-muted-foreground mt-1.5 font-medium leading-relaxed">Connecting Tunisia and global buyers with absolute reliability and quality excellence.</p>
+                <p className="text-sm font-black text-foreground tracking-tight">
+                  Mediterranean trade & logistics hub
+                </p>
+                <p className="text-xs text-muted-foreground mt-1.5 font-medium leading-relaxed">
+                  Connecting Tunisia and global buyers with absolute reliability
+                  and quality excellence.
+                </p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }

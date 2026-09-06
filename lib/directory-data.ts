@@ -1,5 +1,5 @@
-export type CountryKey = "tn" | "ma" | "dz" | "eg" | "ly"
-export type RegionKey = "capital" | "north" | "central" | "south" | "coastal"
+export type CountryKey = "tn" | "ma" | "dz" | "eg" | "ly";
+export type RegionKey = "capital" | "north" | "central" | "south" | "coastal";
 export type CategoryKey =
   | "food"
   | "textiles"
@@ -9,142 +9,147 @@ export type CategoryKey =
   | "cosmetics"
   | "leather"
   | "chemicals"
-export type BusinessTypeKey = "manufacturer" | "supplier" | "exporter" | "wholesaler"
+  | "electrical";
+export type BusinessTypeKey =
+  | "manufacturer"
+  | "supplier"
+  | "exporter"
+  | "wholesaler";
 
-export type CompanyWebsiteMode = "external" | "alsouk" | "both"
-export type CompanyVerificationTier = "basic" | "verified" | "premium"
-export type ProfileLevel = "starter" | "business" | "enterprise"
+export type CompanyWebsiteMode = "external" | "alsouk" | "both";
+export type CompanyVerificationTier = "basic" | "verified" | "premium";
+export type ProfileLevel = "starter" | "business" | "enterprise";
 
 export type Company = {
-  id: string
-  ownerId?: string | null
-  profileLevel: ProfileLevel
-  supplierId: string | null
-  name: string
-  slug: string
-  tagline: string | null
-  description: string | null
-  logoUrl: string | null
-  bannerUrl: string | null
+  id: string;
+  ownerId?: string | null;
+  profileLevel: ProfileLevel;
+  supplierId: string | null;
+  name: string;
+  slug: string;
+  tagline: string | null;
+  description: string | null;
+  logoUrl: string | null;
+  bannerUrl: string | null;
 
   // Digital Presence
-  facebookUrl: string | null
-  instagramUrl: string | null
-  tiktokUrl: string | null
-  linkedinUrl: string | null
-  youtubeUrl: string | null
+  facebookUrl: string | null;
+  instagramUrl: string | null;
+  tiktokUrl: string | null;
+  linkedinUrl: string | null;
+  youtubeUrl: string | null;
 
   // Website strategy
-  websiteUrl: string | null
-  websiteMode: CompanyWebsiteMode
+  websiteUrl: string | null;
+  websiteMode: CompanyWebsiteMode;
   /** The merchant's own online store hosted outside ALSOUK. */
-  externalStoreUrl: string | null
+  externalStoreUrl: string | null;
 
   // Contact & Location
-  businessEmail: string | null
-  phoneNumber: string | null
-  whatsappNumber: string | null
-  country: string
-  city: string | null
-  postalCode: string | null
-  streetAddress: string | null
+  businessEmail: string | null;
+  phoneNumber: string | null;
+  whatsappNumber: string | null;
+  country: string;
+  city: string | null;
+  postalCode: string | null;
+  streetAddress: string | null;
 
   // Public visibility, per field — whether this piece of contact/marketing
   // info shows on the public profile page (see companies_public view).
   // Independent of whether the field itself has a value.
-  websiteVisible: boolean
-  socialVisible: boolean
-  phoneVisible: boolean
-  whatsappVisible: boolean
-  addressVisible: boolean
-  companySizeVisible: boolean
+  websiteVisible: boolean;
+  socialVisible: boolean;
+  phoneVisible: boolean;
+  whatsappVisible: boolean;
+  addressVisible: boolean;
+  companySizeVisible: boolean;
 
   // Business classification
-  businessType: string | null
-  primaryIndustry: string | null
-  yearEstablished: number | null
-  companySize: string | null
-  taxIdentifier: string | null
+  businessType: string | null;
+  primaryIndustry: string | null;
+  yearEstablished: number | null;
+  companySize: string | null;
+  taxIdentifier: string | null;
 
   // Profile progress & verification
-  profileCompletion: number
-  verified: boolean
-  verificationTier: CompanyVerificationTier
-  verifiedAt: string | null
-  licenseDocumentUrl: string | null
+  profileCompletion: number;
+  verified: boolean;
+  verificationTier: CompanyVerificationTier;
+  verifiedAt: string | null;
+  licenseDocumentUrl: string | null;
 
   // Arrays
-  supportedLanguages: string[]
-  exportMarkets: string[]
+  supportedLanguages: string[];
+  exportMarkets: string[];
 
-  metadata: Record<string, any>
-  createdAt: string
-  updatedAt: string
-}
+  metadata: Record<string, any>;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export type CompanyMember = {
-  id: string
-  companyId: string
-  userId: string
-  role: "owner" | "admin" | "member"
-  createdAt: string
-}
+  id: string;
+  companyId: string;
+  userId: string;
+  role: "owner" | "admin" | "member";
+  createdAt: string;
+};
 
 export type CompanyMedia = {
-  id: string
-  companyId: string
-  mediaType: "factory_photo" | "product_gallery" | "video" | "certificate"
-  storageBucket: string
-  storagePath: string
-  url: string
-  caption: string | null
-  position: number
-  createdAt: string
-}
+  id: string;
+  companyId: string;
+  mediaType: "factory_photo" | "product_gallery" | "video" | "certificate";
+  storageBucket: string;
+  storagePath: string;
+  url: string;
+  caption: string | null;
+  position: number;
+  createdAt: string;
+};
 
 export type Supplier = {
-  id: string
-  ownerId: string | null
-  name: string
-  monogram: string
-  logoColor: "blue" | "green"
-  country: CountryKey
-  cityKey: string
-  region: RegionKey
-  verified: boolean
-  products: number
-  years: number
+  id: string;
+  ownerId: string | null;
+  name: string;
+  monogram: string;
+  logoColor: "blue" | "green";
+  country: CountryKey;
+  cityKey: string;
+  region: RegionKey;
+  verified: boolean;
+  products: number;
+  years: number;
   /** Raw founding year, or null when the company hasn't set one. Kept alongside
    *  the derived `years` count so callers can tell "founded this year" (0) apart
    *  from "unknown" (null) instead of both collapsing to the same 0. */
-  yearEstablished: number | null
-  businessTypes: BusinessTypeKey[]
-  categories: CategoryKey[]
+  yearEstablished: number | null;
+  businessTypes: BusinessTypeKey[];
+  categories: CategoryKey[];
   /** Long-form company description shown on the profile page. */
-  description: string | null
+  description: string | null;
   /** Optional hero/logo image URL; falls back to the monogram when absent. */
-  logoUrl: string | null
+  logoUrl: string | null;
   /** The owner-chosen cover photo (companies.banner_url), set via Account.
    *  Takes priority over coverPhotoUrl, which is just whichever gallery
    *  photo happened to be returned first. */
-  bannerUrl: string | null
-  profileViews: number
-  coverPhotoUrl: string | null
+  bannerUrl: string | null;
+  profileViews: number;
+  coverPhotoUrl: string | null;
   /** The merchant's own online store hosted outside ALSOUK, when set. */
-  externalStoreUrl: string | null
+  externalStoreUrl: string | null;
   /** Already null unless the owner opted in — see companies_public view. */
-  websiteUrl: string | null
-  facebookUrl: string | null
-  instagramUrl: string | null
-  tiktokUrl: string | null
-  linkedinUrl: string | null
-  youtubeUrl: string | null
-  phoneNumber: string | null
-  whatsappNumber: string | null
-  streetAddress: string | null
-  postalCode: string | null
-  companySize: string | null
-}
+  websiteUrl: string | null;
+  facebookUrl: string | null;
+  instagramUrl: string | null;
+  tiktokUrl: string | null;
+  linkedinUrl: string | null;
+  youtubeUrl: string | null;
+  phoneNumber: string | null;
+  whatsappNumber: string | null;
+  streetAddress: string | null;
+  postalCode: string | null;
+  companySize: string | null;
+};
 
 /**
  * Supplier data is sourced from Supabase via fetchSuppliers() in
@@ -152,8 +157,14 @@ export type Supplier = {
  * supabase/seed.sql for the table definition and seed rows.
  */
 
-export const COUNTRY_KEYS: CountryKey[] = ["tn", "ma", "dz", "eg", "ly"]
-export const REGION_KEYS: RegionKey[] = ["capital", "north", "central", "south", "coastal"]
+export const COUNTRY_KEYS: CountryKey[] = ["tn", "ma", "dz", "eg", "ly"];
+export const REGION_KEYS: RegionKey[] = [
+  "capital",
+  "north",
+  "central",
+  "south",
+  "coastal",
+];
 export const CATEGORY_KEYS: CategoryKey[] = [
   "food",
   "textiles",
@@ -163,35 +174,45 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "cosmetics",
   "leather",
   "chemicals",
-]
+  "electrical",
+];
 export const BUSINESS_TYPE_KEYS: BusinessTypeKey[] = [
   "manufacturer",
   "supplier",
   "exporter",
   "wholesaler",
-]
+];
 
-export type YearsTier = "any" | "1to3" | "3to5" | "5to10" | "gt10"
-export const YEARS_TIERS: YearsTier[] = ["any", "1to3", "3to5", "5to10", "gt10"]
+export type YearsTier = "any" | "1to3" | "3to5" | "5to10" | "gt10";
+export const YEARS_TIERS: YearsTier[] = [
+  "any",
+  "1to3",
+  "3to5",
+  "5to10",
+  "gt10",
+];
 
 /**
  * `yearEstablished` is null when the company never set a founding year — in
  * that case only "any" matches, since we have no real data to bucket it by.
  */
-export function matchesYears(tier: YearsTier, yearEstablished: number | null): boolean {
-  if (tier === "any") return true
-  if (yearEstablished === null) return false
-  const years = Math.max(0, new Date().getFullYear() - yearEstablished)
+export function matchesYears(
+  tier: YearsTier,
+  yearEstablished: number | null,
+): boolean {
+  if (tier === "any") return true;
+  if (yearEstablished === null) return false;
+  const years = Math.max(0, new Date().getFullYear() - yearEstablished);
   switch (tier) {
     case "1to3":
-      return years >= 1 && years <= 3
+      return years >= 1 && years <= 3;
     case "3to5":
-      return years > 3 && years <= 5
+      return years > 3 && years <= 5;
     case "5to10":
-      return years > 5 && years <= 10
+      return years > 5 && years <= 10;
     case "gt10":
-      return years > 10
+      return years > 10;
     default:
-      return true
+      return true;
   }
 }

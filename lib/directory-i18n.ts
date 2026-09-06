@@ -1,246 +1,246 @@
-import type { Lang } from "@/lib/i18n"
+import type { Lang } from "@/lib/i18n";
 import type {
   BusinessTypeKey,
   CategoryKey,
   CountryKey,
   RegionKey,
   YearsTier,
-} from "@/lib/directory-data"
+} from "@/lib/directory-data";
 
 type DirectoryDict = {
-  breadcrumbHome: string
+  breadcrumbHome: string;
   hero: {
-    badge: string
-    title: string
-    subtitle: string
-    stat1: string
-    stat1label: string
-    stat2: string
-    stat2label: string
-    stat3: string
-    stat3label: string
-  }
+    badge: string;
+    title: string;
+    subtitle: string;
+    stat1: string;
+    stat1label: string;
+    stat2: string;
+    stat2label: string;
+    stat3: string;
+    stat3label: string;
+  };
   search: {
-    placeholder: string
-    button: string
-  }
+    placeholder: string;
+    button: string;
+  };
   filters: {
-    title: string
-    clearAll: string
-    country: string
-    region: string
-    category: string
-    businessType: string
-    verified: string
-    verifiedOnly: string
-    years: string
-    showFilters: string
-    hideFilters: string
-    apply: string
-  }
+    title: string;
+    clearAll: string;
+    country: string;
+    region: string;
+    category: string;
+    businessType: string;
+    verified: string;
+    verifiedOnly: string;
+    years: string;
+    showFilters: string;
+    hideFilters: string;
+    apply: string;
+  };
   sort: {
-    label: string
-    relevance: string
-    newest: string
-    products: string
-    years: string
-  }
+    label: string;
+    relevance: string;
+    newest: string;
+    products: string;
+    years: string;
+  };
   results: {
-    count: (n: number) => string
-    verifiedFilterActive: string
-  }
+    count: (n: number) => string;
+    verifiedFilterActive: string;
+  };
   card: {
-    verified: string
-    products: string
-    yearsInBusiness: string
-    mainCategories: string
-    contact: string
-    quote: string
-  }
+    verified: string;
+    products: string;
+    yearsInBusiness: string;
+    mainCategories: string;
+    contact: string;
+    quote: string;
+  };
   empty: {
-    title: string
-    subtitle: string
-    reset: string
-  }
+    title: string;
+    subtitle: string;
+    reset: string;
+  };
   error: {
-    title: string
-    subtitle: string
-    retry: string
-  }
+    title: string;
+    subtitle: string;
+    retry: string;
+  };
   pagination: {
-    label: string
-    previous: string
-    next: string
-    pageOf: (page: number, total: number) => string
-  }
-  countries: Record<CountryKey, string>
-  regions: Record<RegionKey, string>
-  categories: Record<CategoryKey, string>
-  businessTypes: Record<BusinessTypeKey, string>
-  cities: Record<string, string>
-  yearsTiers: Record<YearsTier, string>
-  anyOption: string
+    label: string;
+    previous: string;
+    next: string;
+    pageOf: (page: number, total: number) => string;
+  };
+  countries: Record<CountryKey, string>;
+  regions: Record<RegionKey, string>;
+  categories: Record<CategoryKey, string>;
+  businessTypes: Record<BusinessTypeKey, string>;
+  cities: Record<string, string>;
+  yearsTiers: Record<YearsTier, string>;
+  anyOption: string;
   profile: {
-    backToDirectory: string
-    verified: string
-    memberSince: string
-    about: string
-    aboutEmpty: string
-    gallery: string
-    galleryEmpty: string
-    categories: string
-    products: string
-    productsCount: (n: number) => string
-    productsEmpty: string
-    certifications: string
-    certificationsEmpty: string
-    commercialTerms: string
-    businessType: string
-    yearsInBusiness: string
-    notAvailable: string
-    companyInfo: string
-    website: string
-    phone: string
-    whatsapp: string
-    address: string
-    companySize: string
-    socialMedia: string
-    location: string
-    region: string
-    requestQuote: string
-    contactSupplier: string
-    notFoundTitle: string
-    notFoundSubtitle: string
-    errorTitle: string
-    errorSubtitle: string
-    retry: string
-    storeBadge: string
-    overview: string
-    follow: string
-    following: string
-    factory: string
-    factoryEmpty: string
-    videos: string
-    videosEmpty: string
-    catalogs: string
-    catalogsEmpty: string
-    externalStore: string
-    visitExternalStore: string
-    reviewsTitle: string
-    reviewsEmpty: string
-    tabOverview: string
-    tabProducts: string
-    tabMedia: string
-    tabReviews: string
+    backToDirectory: string;
+    verified: string;
+    memberSince: string;
+    about: string;
+    aboutEmpty: string;
+    gallery: string;
+    galleryEmpty: string;
+    categories: string;
+    products: string;
+    productsCount: (n: number) => string;
+    productsEmpty: string;
+    certifications: string;
+    certificationsEmpty: string;
+    commercialTerms: string;
+    businessType: string;
+    yearsInBusiness: string;
+    notAvailable: string;
+    companyInfo: string;
+    website: string;
+    phone: string;
+    whatsapp: string;
+    address: string;
+    companySize: string;
+    socialMedia: string;
+    location: string;
+    region: string;
+    requestQuote: string;
+    contactSupplier: string;
+    notFoundTitle: string;
+    notFoundSubtitle: string;
+    errorTitle: string;
+    errorSubtitle: string;
+    retry: string;
+    storeBadge: string;
+    overview: string;
+    follow: string;
+    following: string;
+    factory: string;
+    factoryEmpty: string;
+    videos: string;
+    videosEmpty: string;
+    catalogs: string;
+    catalogsEmpty: string;
+    externalStore: string;
+    visitExternalStore: string;
+    reviewsTitle: string;
+    reviewsEmpty: string;
+    tabOverview: string;
+    tabProducts: string;
+    tabMedia: string;
+    tabReviews: string;
     social: {
-      followers: string
-      following: string
-      posts: string
-      videos: string
-      products: string
-      message: string
-      share: string
-      shareCopied: string
-      goLive: string
-      editProfile: string
-      viewAs: string
-      asBuyer: string
-      asMember: string
-      tabPosts: string
-      tabProducts: string
-      tabVideos: string
-      tabLive: string
-      tabAbout: string
-      gridView: string
-      listView: string
-      like: string
-      comment: string
-      pin: string
-      unpin: string
-      pinnedBadge: string
-      edit: string
-      delete: string
-      createPost: string
-      postPlaceholder: string
-      publish: string
-      cancel: string
-      save: string
-      searchInStore: string
-      allCategories: string
-      uploadVideo: string
-      views: string
-      liveNow: string
-      liveUpcoming: string
-      livePrevious: string
-      joinLive: string
-      watchReplay: string
-      remindMe: string
-      contactChannels: string
-      website: string
-      phone: string
-      whatsapp: string
-      facebook: string
-      tiktok: string
-      businessHours: string
-      businessHoursSoon: string
-      postsEmpty: string
-      videosEmpty: string
-      liveEmpty: string
-    }
-  }
+      followers: string;
+      following: string;
+      posts: string;
+      videos: string;
+      products: string;
+      message: string;
+      share: string;
+      shareCopied: string;
+      goLive: string;
+      editProfile: string;
+      viewAs: string;
+      asBuyer: string;
+      asMember: string;
+      tabPosts: string;
+      tabProducts: string;
+      tabVideos: string;
+      tabLive: string;
+      tabAbout: string;
+      gridView: string;
+      listView: string;
+      like: string;
+      comment: string;
+      pin: string;
+      unpin: string;
+      pinnedBadge: string;
+      edit: string;
+      delete: string;
+      createPost: string;
+      postPlaceholder: string;
+      publish: string;
+      cancel: string;
+      save: string;
+      searchInStore: string;
+      allCategories: string;
+      uploadVideo: string;
+      views: string;
+      liveNow: string;
+      liveUpcoming: string;
+      livePrevious: string;
+      joinLive: string;
+      watchReplay: string;
+      remindMe: string;
+      contactChannels: string;
+      website: string;
+      phone: string;
+      whatsapp: string;
+      facebook: string;
+      tiktok: string;
+      businessHours: string;
+      businessHoursSoon: string;
+      postsEmpty: string;
+      videosEmpty: string;
+      liveEmpty: string;
+    };
+  };
   rfq: {
-    title: string
-    subtitle: (supplier: string) => string
-    companyName: string
-    contactPerson: string
-    email: string
-    phone: string
-    country: string
-    productRequested: string
-    quantity: string
-    targetPrice: string
-    optional: string
-    deliveryDestination: string
-    message: string
-    messagePlaceholder: string
-    submit: string
-    submitting: string
-    cancel: string
-    close: string
-    successTitle: string
-    successBody: string
-    sendAnother: string
-    errorTitle: string
-    errorBody: string
-    notFoundBody: string
-    errRequired: string
-    errEmail: string
-    errPhone: string
-    errMessage: string
-  }
+    title: string;
+    subtitle: (supplier: string) => string;
+    companyName: string;
+    contactPerson: string;
+    email: string;
+    phone: string;
+    country: string;
+    productRequested: string;
+    quantity: string;
+    targetPrice: string;
+    optional: string;
+    deliveryDestination: string;
+    message: string;
+    messagePlaceholder: string;
+    submit: string;
+    submitting: string;
+    cancel: string;
+    close: string;
+    successTitle: string;
+    successBody: string;
+    sendAnother: string;
+    errorTitle: string;
+    errorBody: string;
+    notFoundBody: string;
+    errRequired: string;
+    errEmail: string;
+    errPhone: string;
+    errMessage: string;
+  };
   admin: {
-    title: string
-    subtitle: string
-    unauthorized: string
-    unconfigured: string
-    error: string
-    loading: string
-    emptyTitle: string
-    emptyBody: string
-    count: (n: number) => string
-    refresh: string
-    colDate: string
-    colSupplier: string
-    colBuyer: string
-    colContact: string
-    colProduct: string
-    colQuantity: string
-    colTargetPrice: string
-    colDestination: string
-    colMessage: string
-    colStatus: string
-  }
-}
+    title: string;
+    subtitle: string;
+    unauthorized: string;
+    unconfigured: string;
+    error: string;
+    loading: string;
+    emptyTitle: string;
+    emptyBody: string;
+    count: (n: number) => string;
+    refresh: string;
+    colDate: string;
+    colSupplier: string;
+    colBuyer: string;
+    colContact: string;
+    colProduct: string;
+    colQuantity: string;
+    colTargetPrice: string;
+    colDestination: string;
+    colMessage: string;
+    colStatus: string;
+  };
+};
 
 export const directoryT: Record<Lang, DirectoryDict> = {
   en: {
@@ -301,7 +301,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
     },
     error: {
       title: "Couldn't load suppliers",
-      subtitle: "We couldn't reach the suppliers database. Please try again in a moment.",
+      subtitle:
+        "We couldn't reach the suppliers database. Please try again in a moment.",
       retry: "Try again",
     },
     pagination: {
@@ -333,6 +334,7 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       cosmetics: "Cosmetics & Health",
       leather: "Leather & Footwear",
       chemicals: "Chemicals & Plastics",
+      electrical: "Electrical & Electronics",
     },
     businessTypes: {
       manufacturer: "Manufacturer",
@@ -375,7 +377,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       categories: "Product categories",
       products: "Products",
       productsCount: (n) => `${n} product${n === 1 ? "" : "s"} in catalog`,
-      productsEmpty: "The full product catalog isn't available online yet — request a quote to receive it.",
+      productsEmpty:
+        "The full product catalog isn't available online yet — request a quote to receive it.",
       certifications: "Certifications",
       certificationsEmpty: "No certifications have been listed yet.",
       commercialTerms: "Commercial terms",
@@ -394,24 +397,29 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       requestQuote: "Request Quote",
       contactSupplier: "Contact supplier",
       notFoundTitle: "Supplier not found",
-      notFoundSubtitle: "We couldn't find the supplier you're looking for. It may have been removed.",
+      notFoundSubtitle:
+        "We couldn't find the supplier you're looking for. It may have been removed.",
       errorTitle: "Couldn't load this supplier",
-      errorSubtitle: "We couldn't reach the suppliers database. Please try again in a moment.",
+      errorSubtitle:
+        "We couldn't reach the suppliers database. Please try again in a moment.",
       retry: "Try again",
       storeBadge: "Official Store",
       overview: "Overview",
       follow: "Follow",
       following: "Following",
       factory: "Factory & capabilities",
-      factoryEmpty: "Factory details aren't published yet — request a quote to learn about production capacity and lead times.",
+      factoryEmpty:
+        "Factory details aren't published yet — request a quote to learn about production capacity and lead times.",
       videos: "Videos",
       videosEmpty: "This supplier hasn't published any videos yet.",
       catalogs: "Catalogs & documents",
-      catalogsEmpty: "No downloadable catalogs have been shared yet — request a quote to receive them.",
+      catalogsEmpty:
+        "No downloadable catalogs have been shared yet — request a quote to receive them.",
       externalStore: "Online store",
       visitExternalStore: "Visit External Store",
       reviewsTitle: "Buyer reviews",
-      reviewsEmpty: "No written reviews yet. Be the first to work with this supplier.",
+      reviewsEmpty:
+        "No written reviews yet. Be the first to work with this supplier.",
       tabOverview: "Overview",
       tabProducts: "Products",
       tabMedia: "Media",
@@ -474,7 +482,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
     },
     rfq: {
       title: "Request a quote",
-      subtitle: (supplier) => `Tell ${supplier} what you need and they'll get back to you.`,
+      subtitle: (supplier) =>
+        `Tell ${supplier} what you need and they'll get back to you.`,
       companyName: "Company name",
       contactPerson: "Contact person",
       email: "Email",
@@ -486,16 +495,19 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       optional: "optional",
       deliveryDestination: "Delivery destination",
       message: "Message",
-      messagePlaceholder: "Describe your requirements, specifications, timeline…",
+      messagePlaceholder:
+        "Describe your requirements, specifications, timeline…",
       submit: "Send request",
       submitting: "Sending…",
       cancel: "Cancel",
       close: "Close",
       successTitle: "Request sent",
-      successBody: "Your quote request has been sent. The supplier will contact you at the email you provided.",
+      successBody:
+        "Your quote request has been sent. The supplier will contact you at the email you provided.",
       sendAnother: "Send another request",
       errorTitle: "Couldn't send your request",
-      errorBody: "Something went wrong while sending your request. Please try again in a moment.",
+      errorBody:
+        "Something went wrong while sending your request. Please try again in a moment.",
       notFoundBody: "This supplier is no longer available.",
       errRequired: "This field is required.",
       errEmail: "Enter a valid email address.",
@@ -506,7 +518,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       title: "RFQ submissions",
       subtitle: "Quote requests submitted by buyers.",
       unauthorized: "Admin access required.",
-      unconfigured: "The admin view isn't configured on the server yet (missing service key).",
+      unconfigured:
+        "The admin view isn't configured on the server yet (missing service key).",
       error: "Couldn't load submissions. Please try again.",
       loading: "Loading submissions…",
       emptyTitle: "No submissions yet",
@@ -565,7 +578,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       years: "Plus expérimentés",
     },
     results: {
-      count: (n) => `${n} fournisseur${n === 1 ? "" : "s"} trouvé${n === 1 ? "" : "s"}`,
+      count: (n) =>
+        `${n} fournisseur${n === 1 ? "" : "s"} trouvé${n === 1 ? "" : "s"}`,
       verifiedFilterActive: "Vérifiés uniquement",
     },
     card: {
@@ -578,12 +592,14 @@ export const directoryT: Record<Lang, DirectoryDict> = {
     },
     empty: {
       title: "Aucun fournisseur ne correspond à vos filtres",
-      subtitle: "Essayez d'ajuster ou d'effacer certains filtres pour voir plus de résultats.",
+      subtitle:
+        "Essayez d'ajuster ou d'effacer certains filtres pour voir plus de résultats.",
       reset: "Effacer tous les filtres",
     },
     error: {
       title: "Impossible de charger les fournisseurs",
-      subtitle: "Nous n'avons pas pu joindre la base de données des fournisseurs. Veuillez réessayer dans un instant.",
+      subtitle:
+        "Nous n'avons pas pu joindre la base de données des fournisseurs. Veuillez réessayer dans un instant.",
       retry: "Réessayer",
     },
     pagination: {
@@ -615,6 +631,7 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       cosmetics: "Cosmétiques & Santé",
       leather: "Cuir & Chaussures",
       chemicals: "Chimie & Plastiques",
+      electrical: "Électrique & Électronique",
     },
     businessTypes: {
       manufacturer: "Fabricant",
@@ -657,7 +674,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       categories: "Catégories de produits",
       products: "Produits",
       productsCount: (n) => `${n} produit${n === 1 ? "" : "s"} au catalogue`,
-      productsEmpty: "Le catalogue complet n'est pas encore disponible en ligne — demandez un devis pour le recevoir.",
+      productsEmpty:
+        "Le catalogue complet n'est pas encore disponible en ligne — demandez un devis pour le recevoir.",
       certifications: "Certifications",
       certificationsEmpty: "Aucune certification n'a encore été renseignée.",
       commercialTerms: "Conditions commerciales",
@@ -676,27 +694,32 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       requestQuote: "Demander un devis",
       contactSupplier: "Contacter le fournisseur",
       notFoundTitle: "Fournisseur introuvable",
-      notFoundSubtitle: "Nous n'avons pas trouvé le fournisseur recherché. Il a peut-être été supprimé.",
+      notFoundSubtitle:
+        "Nous n'avons pas trouvé le fournisseur recherché. Il a peut-être été supprimé.",
       storeBadge: "Boutique officielle",
       overview: "Aperçu",
       follow: "Suivre",
       following: "Suivi",
       factory: "Usine et capacités",
-      factoryEmpty: "Les détails de l'usine ne sont pas encore publiés — demandez un devis pour connaître la capacité de production et les délais.",
+      factoryEmpty:
+        "Les détails de l'usine ne sont pas encore publiés — demandez un devis pour connaître la capacité de production et les délais.",
       videos: "Vidéos",
       videosEmpty: "Ce fournisseur n'a pas encore publié de vidéos.",
       catalogs: "Catalogues et documents",
-      catalogsEmpty: "Aucun catalogue téléchargeable n'a encore été partagé — demandez un devis pour les recevoir.",
+      catalogsEmpty:
+        "Aucun catalogue téléchargeable n'a encore été partagé — demandez un devis pour les recevoir.",
       externalStore: "Boutique en ligne",
       visitExternalStore: "Visiter la boutique externe",
       reviewsTitle: "Avis des acheteurs",
-      reviewsEmpty: "Aucun avis écrit pour le moment. Soyez le premier à travailler avec ce fournisseur.",
+      reviewsEmpty:
+        "Aucun avis écrit pour le moment. Soyez le premier à travailler avec ce fournisseur.",
       tabOverview: "Aperçu",
       tabProducts: "Produits",
       tabMedia: "Médias",
       tabReviews: "Avis",
       errorTitle: "Impossible de charger ce fournisseur",
-      errorSubtitle: "Nous n'avons pas pu joindre la base de données des fournisseurs. Veuillez réessayer dans un instant.",
+      errorSubtitle:
+        "Nous n'avons pas pu joindre la base de données des fournisseurs. Veuillez réessayer dans un instant.",
       retry: "Réessayer",
       social: {
         followers: "Abonnés",
@@ -727,7 +750,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
         edit: "Modifier",
         delete: "Supprimer",
         createPost: "Créer une publication",
-        postPlaceholder: "Partagez une nouveauté produit, une offre ou une annonce…",
+        postPlaceholder:
+          "Partagez une nouveauté produit, une offre ou une annonce…",
         publish: "Publier",
         cancel: "Annuler",
         save: "Enregistrer",
@@ -756,7 +780,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
     },
     rfq: {
       title: "Demander un devis",
-      subtitle: (supplier) => `Indiquez à ${supplier} ce dont vous avez besoin et il vous répondra.`,
+      subtitle: (supplier) =>
+        `Indiquez à ${supplier} ce dont vous avez besoin et il vous répondra.`,
       companyName: "Nom de l'entreprise",
       contactPerson: "Personne à contacter",
       email: "E-mail",
@@ -774,25 +799,30 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       cancel: "Annuler",
       close: "Fermer",
       successTitle: "Demande envoyée",
-      successBody: "Votre demande de devis a été envoyée. Le fournisseur vous contactera à l'e-mail fourni.",
+      successBody:
+        "Votre demande de devis a été envoyée. Le fournisseur vous contactera à l'e-mail fourni.",
       sendAnother: "Envoyer une autre demande",
       errorTitle: "Impossible d'envoyer votre demande",
-      errorBody: "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer dans un instant.",
+      errorBody:
+        "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer dans un instant.",
       notFoundBody: "Ce fournisseur n'est plus disponible.",
       errRequired: "Ce champ est obligatoire.",
       errEmail: "Saisissez une adresse e-mail valide.",
       errPhone: "Saisissez un numéro de téléphone valide.",
-      errMessage: "Veuillez ajouter quelques précisions (au moins 10 caractères).",
+      errMessage:
+        "Veuillez ajouter quelques précisions (au moins 10 caractères).",
     },
     admin: {
       title: "Demandes de devis",
       subtitle: "Demandes de devis soumises par les acheteurs.",
       unauthorized: "Accès administrateur requis.",
-      unconfigured: "La vue administrateur n'est pas encore configurée sur le serveur (clé de service manquante).",
+      unconfigured:
+        "La vue administrateur n'est pas encore configurée sur le serveur (clé de service manquante).",
       error: "Impossible de charger les demandes. Veuillez réessayer.",
       loading: "Chargement des demandes…",
       emptyTitle: "Aucune demande pour le moment",
-      emptyBody: "Les demandes de devis soumises par les acheteurs apparaîtront ici.",
+      emptyBody:
+        "Les demandes de devis soumises par les acheteurs apparaîtront ici.",
       count: (n) => `${n} demande${n === 1 ? "" : "s"}`,
       refresh: "Actualiser",
       colDate: "Date",
@@ -865,7 +895,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
     },
     error: {
       title: "تعذّر تحميل الموردين",
-      subtitle: "تعذّر الوصول إلى قاعدة بيانات الموردين. يُرجى المحاولة مرة أخرى بعد قليل.",
+      subtitle:
+        "تعذّر الوصول إلى قاعدة بيانات الموردين. يُرجى المحاولة مرة أخرى بعد قليل.",
       retry: "إعادة المحاولة",
     },
     pagination: {
@@ -897,6 +928,7 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       cosmetics: "مستحضرات التجميل والصحة",
       leather: "الجلود والأحذية",
       chemicals: "الكيماويات والبلاستيك",
+      electrical: "الصناعات الكهربائية",
     },
     businessTypes: {
       manufacturer: "مصنّع",
@@ -939,7 +971,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       categories: "فئات المنتجات",
       products: "المنتجات",
       productsCount: (n) => `${n} منتج في الكتالوج`,
-      productsEmpty: "الكتالوج الكامل غير متاح على الإنترنت بعد — اطلب عرض سعر لاستلامه.",
+      productsEmpty:
+        "الكتالوج الكامل غير متاح على الإنترنت بعد — اطلب عرض سعر لاستلامه.",
       certifications: "الشهادات",
       certificationsEmpty: "لم يتم إدراج أي شهادات بعد.",
       commercialTerms: "الشروط التجارية",
@@ -964,21 +997,25 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       follow: "متابعة",
       following: "تتابع",
       factory: "المصنع والقدرات",
-      factoryEmpty: "لم يتم نشر تفاصيل المصنع بعد — اطلب عرض سعر لمعرفة الطاقة الإنتاجية ومدد التسليم.",
+      factoryEmpty:
+        "لم يتم نشر تفاصيل المصنع بعد — اطلب عرض سعر لمعرفة الطاقة الإنتاجية ومدد التسليم.",
       videos: "الفيديوهات",
       videosEmpty: "لم ينشر هذا المورّد أي فيديوهات بعد.",
       catalogs: "الكتالوجات والمستندات",
-      catalogsEmpty: "لم تتم مشاركة أي كتالوجات قابلة للتنزيل بعد — اطلب عرض سعر لاستلامها.",
+      catalogsEmpty:
+        "لم تتم مشاركة أي كتالوجات قابلة للتنزيل بعد — اطلب عرض سعر لاستلامها.",
       externalStore: "المتجر الإلكتروني",
       visitExternalStore: "زيارة المتجر الخارجي",
       reviewsTitle: "تقييمات المشترين",
-      reviewsEmpty: "لا توجد مراجعات مكتوبة بعد. كن أول من يتعامل مع هذا المورّد.",
+      reviewsEmpty:
+        "لا توجد مراجعات مكتوبة بعد. كن أول من يتعامل مع هذا المورّد.",
       tabOverview: "نظرة عامة",
       tabProducts: "المنتجات",
       tabMedia: "الوسائط",
       tabReviews: "التقييمات",
       errorTitle: "تعذّر تحميل هذا المورّد",
-      errorSubtitle: "تعذّر الوصول إلى قاعدة بيانات الموردين. يُرجى المحاولة مرة أخرى بعد قليل.",
+      errorSubtitle:
+        "تعذّر الوصول إلى قاعدة بيانات الموردين. يُرجى المحاولة مرة أخرى بعد قليل.",
       retry: "إعادة المحاولة",
       social: {
         followers: "المتابعون",
@@ -1056,7 +1093,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       cancel: "إلغاء",
       close: "إغلاق",
       successTitle: "تم إرسال الطلب",
-      successBody: "تم إرسال طلب عرض السعر. سيتواصل معك المورّد عبر البريد الإلكتروني الذي قدمته.",
+      successBody:
+        "تم إرسال طلب عرض السعر. سيتواصل معك المورّد عبر البريد الإلكتروني الذي قدمته.",
       sendAnother: "إرسال طلب آخر",
       errorTitle: "تعذّر إرسال طلبك",
       errorBody: "حدث خطأ أثناء إرسال طلبك. يُرجى المحاولة مرة أخرى بعد قليل.",
@@ -1070,7 +1108,8 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       title: "طلبات عروض الأسعار",
       subtitle: "طلبات عروض الأسعار المقدّمة من المشترين.",
       unauthorized: "صلاحية المشرف مطلوبة.",
-      unconfigured: "لم تُهيّأ لوحة المشرف على الخادم بعد (مفتاح الخدمة مفقود).",
+      unconfigured:
+        "لم تُهيّأ لوحة المشرف على الخادم بعد (مفتاح الخدمة مفقود).",
       error: "تعذّر تحميل الطلبات. يُرجى المحاولة مرة أخرى.",
       loading: "جارٍ تحميل الطلبات…",
       emptyTitle: "لا توجد طلبات بعد",
@@ -1089,4 +1128,4 @@ export const directoryT: Record<Lang, DirectoryDict> = {
       colStatus: "الحالة",
     },
   },
-}
+};
